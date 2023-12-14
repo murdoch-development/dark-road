@@ -11,6 +11,8 @@ position = Vector2( 584.495, 240.814 )
 script = ExtResource( 2 )
 
 [node name="Physics" type="RigidBody2D" parent="."]
+rotation = 1.5708
+gravity_scale = 0.0
 
 [node name="Sprite" type="Sprite" parent="Physics"]
 texture = ExtResource( 1 )
