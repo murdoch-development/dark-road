@@ -3,7 +3,7 @@ extends RigidBody2D
 export var acceleration_factor = 300.0
 export var turn_factor = 1.0
 export var drift_turn_factor = 2.0
-export var opposite_drift_turn_factor = 1.2
+export var opposite_drift_turn_factor = 0.9
 export var sideways_dynamic_friction = 0.3
 export var sideways_static_friction = 0.3
 
