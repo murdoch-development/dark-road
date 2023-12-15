@@ -3,7 +3,7 @@ extends RigidBody2D
 export var acceleration_factor = 300.0
 export var turn_factor = 1.0
 export var drift_turn_factor = 2.0
-export var opposite_drift_turn_factor = 0.5
+export var opposite_drift_turn_factor = 1.2
 export var sideways_dynamic_friction = 0.3
 export var sideways_static_friction = 0.3
 
@@ -42,14 +42,16 @@ func apply_steering(delta):
 	var current_turn_factor = turn_factor
 	if is_drifting:
 		current_turn_factor = drift_turn_factor
-		#print("steering dir: ", steering_input)
-		#print("sideways dir: ", sideways_velocity_direction())
 
 	var forward_direction = Vector2.UP.rotated(rotation)
 	var forward_velocity = forward_direction * forward_direction.dot(linear_velocity)
 	if forward_velocity.length() < 50 and ! is_drifting:
 		current_turn_factor *= 0.5
 	rotation_angle -= steering_input * current_turn_factor * delta
+	if is_drifting:
+		if sideways_velocity_direction(rotation_angle) != steering_input:
+			#opposite drift
+			rotation_angle += steering_input * current_turn_factor * delta * opposite_drift_turn_factor
 	rotation = rotation_angle
 
 func apply_drift(delta):
@@ -65,9 +67,9 @@ func apply_drift(delta):
 	var sideways_friction_force = sideways_friction * 10 * sideways_velocity.length() * -sideways_velocity.normalized()
 	apply_central_impulse(sideways_friction_force * delta)
 
-func sideways_velocity_direction():
+func sideways_velocity_direction(rotation_angle):
 	#RIGHT = -1, LEFT = 1
-	var forward_direction = Vector2.UP.rotated(rotation)
+	var forward_direction = Vector2.UP.rotated(rotation_angle)
 	var perpendicular_vector = Vector2(forward_direction.y, -forward_direction.x)
 
 	var sideways_velocity = linear_velocity - (forward_direction * forward_direction.dot(linear_velocity))
