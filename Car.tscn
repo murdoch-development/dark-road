@@ -7,7 +7,7 @@
 extents = Vector2( 34.6743, 65.7472 )
 
 [node name="Car" type="RigidBody2D"]
-position = Vector2( 999.091, 1025.99 )
+position = Vector2( 1029.09, 1031.99 )
 gravity_scale = 0.0
 script = ExtResource( 2 )
 
