@@ -1,6 +1,8 @@
 extends RigidBody2D
 
-export var acceleration_factor = 300.0
+var Skidmark = preload("Skidmark.tscn")
+
+export var acceleration_factor = 600.0
 export var turn_factor = 1.0
 export var drift_turn_factor = 2.0
 export var opposite_drift_turn_factor = 0.9
@@ -64,6 +66,7 @@ func apply_drift(delta):
 		sideways_friction *= 1
 	else:
 		is_drifting = true
+		do_skidmark(forward_velocity)
 	var sideways_friction_force = sideways_friction * 10 * sideways_velocity.length() * -sideways_velocity.normalized()
 	apply_central_impulse(sideways_friction_force * delta)
 
@@ -78,3 +81,14 @@ func sideways_velocity_direction(rotation_angle):
 		return -1 # Sideways velocity is to the right
 	else:
 		return 1 # Sideways velocity is to the left
+
+func do_skidmark(forward_velocity):
+	var skidmark = Skidmark.instance()
+	
+	if forward_velocity.length() > 150:
+		skidmark.lengthen()
+	
+	skidmark.rotation = rotation
+	skidmark.position = $BackTyres.global_position
+	skidmark.position.y += 8 #Magic Number, dunno why this needs to be done but fixes some weird offset 
+	get_parent().add_child(skidmark)
