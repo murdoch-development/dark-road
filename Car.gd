@@ -62,7 +62,7 @@ func apply_engine_force(delta):
 		linear_damp = 2
 		return
 	if is_offroad:
-		linear_damp = 0.5
+		linear_damp = 1
 	var forward_direction = Vector2.UP.rotated(rotation)
 	var forward_velocity = forward_direction * forward_direction.dot(linear_velocity)
 	if forward_velocity.length() > top_speed and acceleration_input > 0:
@@ -119,7 +119,6 @@ func apply_drift(delta):
 	var sideways_velocity = linear_velocity - forward_velocity
 	var sideways_friction = sideways_dynamic_friction
 	
-	print(forward_velocity.length())
 	if (sideways_velocity.length() >= min_sideways_speed_for_drift and forward_velocity.length() < 2000)\
 	or (sideways_velocity.length() >= 3 * min_sideways_speed_for_drift and forward_velocity.length() >= 2000)\
 	or (handbrake and linear_velocity.length() > very_slow_turning_speed):
@@ -187,3 +186,12 @@ func do_skidmark(forward_velocity):
 			back_skidmark.position.y += 10 #Magic Number, dunno why this needs to be done but fixes some weird offset 
 			mid_skidmark.queue_free()
 		get_parent().add_child(back_skidmark)
+
+func _on_RoadDetector_body_entered(body):
+	print('entered')
+	is_offroad = false
+
+func _on_RoadDetector_body_exited(body):
+	print('exited')
+	is_offroad = true
+

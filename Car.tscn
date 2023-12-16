@@ -68,8 +68,11 @@ rotation = 1.5708
 shape = SubResource( 4 )
 
 [node name="RoadDetector" type="Area2D" parent="."]
-collision_layer = 0
+collision_layer = 32
 collision_mask = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RoadDetector"]
 shape = SubResource( 5 )
+
+[connection signal="body_entered" from="RoadDetector" to="." method="_on_RoadDetector_body_entered"]
+[connection signal="body_exited" from="RoadDetector" to="." method="_on_RoadDetector_body_exited"]
