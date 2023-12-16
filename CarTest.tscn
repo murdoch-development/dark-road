@@ -13,8 +13,7 @@ position = Vector2( -4, -12 )
 [node name="Camera2D" type="Camera2D" parent="Car"]
 current = true
 
-[node name="Listener2D" type="Listener2D" parent="Car"]
-current = true
+[node name="Listener2D" type="Node" parent="Car"]
 
 [node name="Background" type="Node2D" parent="."]
 position = Vector2( -15, -45 )
@@ -1342,9 +1341,57 @@ position = Vector2( -1036, 417 )
 mass = 0.2
 
 [node name="Zombie5" parent="Mobs" instance=ExtResource( 4 )]
-position = Vector2( -1168, -321 )
+position = Vector2( -846, -321 )
 mass = 0.2
 
 [node name="Zombie6" parent="Mobs" instance=ExtResource( 4 )]
-position = Vector2( -2062, 71 )
+position = Vector2( -1740, 71 )
+mass = 0.2
+
+[node name="Zombie7" parent="Mobs" instance=ExtResource( 4 )]
+position = Vector2( 323, -353 )
+mass = 0.2
+
+[node name="Zombie8" parent="Mobs" instance=ExtResource( 4 )]
+position = Vector2( 323, 559 )
+mass = 0.2
+
+[node name="Zombie9" parent="Mobs" instance=ExtResource( 4 )]
+position = Vector2( -382, -410 )
+mass = 0.2
+
+[node name="Zombie10" parent="Mobs" instance=ExtResource( 4 )]
+position = Vector2( -715, 416 )
+mass = 0.2
+
+[node name="Zombie11" parent="Mobs" instance=ExtResource( 4 )]
+position = Vector2( -846, -321 )
+mass = 0.2
+
+[node name="Zombie12" parent="Mobs" instance=ExtResource( 4 )]
+position = Vector2( -1740, 71 )
+mass = 0.2
+
+[node name="Zombie13" parent="Mobs" instance=ExtResource( 4 )]
+position = Vector2( 675, -353 )
+mass = 0.2
+
+[node name="Zombie14" parent="Mobs" instance=ExtResource( 4 )]
+position = Vector2( 675, 559 )
+mass = 0.2
+
+[node name="Zombie15" parent="Mobs" instance=ExtResource( 4 )]
+position = Vector2( -30, -410 )
+mass = 0.2
+
+[node name="Zombie16" parent="Mobs" instance=ExtResource( 4 )]
+position = Vector2( -362, 417 )
+mass = 0.2
+
+[node name="Zombie17" parent="Mobs" instance=ExtResource( 4 )]
+position = Vector2( -494, -321 )
+mass = 0.2
+
+[node name="Zombie18" parent="Mobs" instance=ExtResource( 4 )]
+position = Vector2( -1388, 71 )
 mass = 0.2

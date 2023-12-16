@@ -1,14 +1,21 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Assets/MonsterBakkie.png" type="Texture" id=1]
 [ext_resource path="res://Car.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Sounds/tires_squal_loop.wav" type="AudioStream" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 30, 62 )
+extents = Vector2( 36.1646, 91.2242 )
 
 [sub_resource type="CapsuleShape2D" id=2]
 height = 54.3407
+
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 31.8766
+height = 54.663
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 91.378, 57.7845 )
 
 [node name="Car" type="RigidBody2D"]
 gravity_scale = 0.0
@@ -38,3 +45,21 @@ shape = SubResource( 2 )
 [node name="TyreSqueal" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
 volume_db = -9.087
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 0, -100.387 )
+rotation = 1.5708
+shape = SubResource( 3 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 0, 84.3768 )
+rotation = 1.5708
+shape = SubResource( 3 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 0, -3.12801 )
+rotation = 1.5708
+shape = SubResource( 4 )

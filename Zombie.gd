@@ -7,9 +7,11 @@ var car_node: RigidBody2D
 var idle_distance = 1000  # The distance at which the zombie starts moving towards the car
 var zombie_top_speed = 200  # The maximum speed of the zombie
 var zombie_acceleration_factor = 1
+var is_attacking = false
 
 # Preload the zombie sound effects
 func _ready():
+	$AnimatedSprite.play("move")
 	car_node = get_parent().get_parent().get_node("Car")
 	linear_damp = 1
 
@@ -33,16 +35,8 @@ func _on_Timer_timeout():
 
 func play_random_sound():
 	# Play a random sound
-	var sound_player = AudioStreamPlayer2D.new()
-	add_child(sound_player)
-	sound_player.stream = zombie_sounds[randi() % zombie_sounds.size()]
-	sound_player.play()
-
-	# Adjust volume based on distance to Listener2D
-	var listener = get_node_or_null("/root/Listener2D")  # Replace with the actual path to your Listener2D
-	if listener:
-			var distance = global_position.distance_to(listener.global_position)
-			sound_player.volume_db = -distance  # Adjust this formula as needed
+	$AudioStreamPlayer2D.stream = zombie_sounds[randi() % zombie_sounds.size()]
+	$AudioStreamPlayer2D.play()
 
 	# Reset the timer
 	timer.wait_time = rand_range(1, 5)
@@ -54,7 +48,8 @@ func _physics_process(_delta):
 	# if distance > idle_distance:
 	#     idle()
 	# else:
-	move_towards_car(car_position)
+	if not is_attacking:
+		move_towards_car(car_position)
 
 func idle():
 	$AnimatedSprite.play("idle")
@@ -68,19 +63,18 @@ func move_towards_car(car_position):
 	else:
 		linear_damp = 1
 	apply_central_impulse(direction * zombie_acceleration_factor)	
-	print(linear_velocity.length())
 	# Move Zombie3 towards the Car by updating its position.
 	global_position += direction * 0.7
 
 	# Rotate Zombie3 to face the Car.
 	rotation = atan2(direction.y, direction.x)
 
-	$AnimatedSprite.play("move")
-
-func _on_Zombie_body_entered(body):
-	if body == car_node:
-			attack()
-
-
-func attack():
+func _on_Area2D_area_entered(area):
+	is_attacking = true
 	$AnimatedSprite.play("attack")
+	print('hit car')
+
+func _on_Area2D_area_exited(area):
+	$AnimatedSprite.play("move")
+	is_attacking = false
+	print('hit car')

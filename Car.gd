@@ -12,6 +12,8 @@ export var sideways_dynamic_friction = 0.3
 export var sideways_static_friction = 0.3
 export var handbrake_turn_factor = 2.5
 
+var highspeed = 2000
+var very_high_speed = 3000
 var acceleration_input = 0
 var steering_input = 0
 var rotation_angle = 0
@@ -28,7 +30,6 @@ func _ready():
 	pass
 
 func _physics_process(delta):
-	print(linear_damp)
 	get_inputs()
 	apply_steering(delta)
 	apply_engine_force(delta)
@@ -99,7 +100,11 @@ func apply_drift(delta):
 	var forward_velocity = forward_direction * forward_direction.dot(linear_velocity)
 	var sideways_velocity = linear_velocity - forward_velocity
 	var sideways_friction = sideways_dynamic_friction
-	if sideways_velocity.length() >= 100 or (handbrake and linear_velocity.length() > very_slow_turning_speed) :
+	
+	print(forward_velocity.length())
+	if (sideways_velocity.length() >= min_sideways_speed_for_drift and forward_velocity.length() < 2000)\
+	or (sideways_velocity.length() >= 3 * min_sideways_speed_for_drift and forward_velocity.length() >= 2000)\
+	or (handbrake and linear_velocity.length() > very_slow_turning_speed):
 		is_drifting = true
 		if not $TyreSqueal.playing:
 			$TyreSqueal.play()
