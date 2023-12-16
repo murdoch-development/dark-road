@@ -20,6 +20,16 @@ extents = Vector2( 91.378, 57.7845 )
 [node name="Car" type="RigidBody2D"]
 gravity_scale = 0.0
 script = ExtResource( 2 )
+acceleration_factor = null
+turn_factor = null
+slow_turn_factor = null
+fast_turn_factor = null
+very_slow_turn_factor = null
+drift_turn_factor = null
+opposite_drift_turn_factor = null
+sideways_dynamic_friction = null
+sideways_static_friction = null
+handbrake_turn_factor = null
 
 [node name="FrontTyres" type="Node2D" parent="."]
 position = Vector2( 0, -75.1944 )

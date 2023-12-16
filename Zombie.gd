@@ -5,7 +5,7 @@ var timer = Timer.new()
 const SOUND_DIR = "res://Assets/Sounds/Zombie/"
 var car_node: RigidBody2D
 var idle_distance = 1000  # The distance at which the zombie starts moving towards the car
-var zombie_top_speed = 200  # The maximum speed of the zombie
+var zombie_top_speed = 300  # The maximum speed of the zombie
 var zombie_acceleration_factor = 1
 var is_attacking = false
 

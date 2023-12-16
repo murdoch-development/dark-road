@@ -12,9 +12,10 @@ export var opposite_drift_turn_factor = 0.9
 export var sideways_dynamic_friction = 0.3
 export var sideways_static_friction = 0.3
 export var handbrake_turn_factor = 2.5
+export var top_speed = 2800
 
 var high_speed = 2000
-var very_high_speed = 3000
+var very_high_speed = 2600
 var acceleration_input = 0
 var steering_input = 0
 var rotation_angle = 0
@@ -59,7 +60,18 @@ func apply_engine_force(delta):
 	if handbrake:
 		linear_damp = 2
 		return
-	var engine_force_vector = Vector2.UP.rotated(rotation) * acceleration_input * acceleration_factor
+	var forward_direction = Vector2.UP.rotated(rotation)
+	var forward_velocity = forward_direction * forward_direction.dot(linear_velocity)
+	if forward_velocity.length() > top_speed and acceleration_input > 0:
+		#dont forward accelerate at top speed
+		return
+	if forward_velocity.length() > top_speed / 2 and acceleration_input < 0:
+		#dont reverse accelerate at half top speed
+		return
+	var current_acceleration_factor = acceleration_factor
+	if forward_velocity.length() > high_speed:
+		current_acceleration_factor = acceleration_factor / 2
+	var engine_force_vector = Vector2.UP.rotated(rotation) * acceleration_input * current_acceleration_factor
 	apply_central_impulse(engine_force_vector * delta)
 	
 func apply_steering(delta):
