@@ -38,7 +38,7 @@ func _physics_process(delta):
 	apply_steering(delta)
 	apply_engine_force(delta)
 	apply_drift(delta)
-	emit_signal(is_offroad, linear_velocity.length())
+	emit_signal("screen_shake", is_offroad, linear_velocity.length())
 
 func get_inputs():
 	if Input.is_action_pressed("ui_left"):
