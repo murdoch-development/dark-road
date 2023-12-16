@@ -5,6 +5,7 @@
 [ext_resource path="res://Assets/Skidmarks/skidmark_short_2.png" type="Texture" id=4]
 
 [node name="Skidmark" type="Node2D"]
+scale = Vector2( 1.15, 1 )
 z_index = -90
 script = ExtResource( 2 )
 
@@ -13,9 +14,11 @@ position = Vector2( 0, 8 )
 
 [node name="Sprite" type="Sprite" parent="Short"]
 texture = ExtResource( 1 )
+offset = Vector2( -1, 0 )
 
 [node name="Sprite2" type="Sprite" parent="Short"]
 texture = ExtResource( 4 )
+offset = Vector2( -1, 0 )
 
 [node name="Long" type="Node2D" parent="."]
 visible = false
@@ -23,6 +26,8 @@ position = Vector2( 0, 24 )
 
 [node name="Sprite" type="Sprite" parent="Long"]
 texture = ExtResource( 1 )
+offset = Vector2( -1, 0 )
 
 [node name="Sprite2" type="Sprite" parent="Long"]
 texture = ExtResource( 4 )
+offset = Vector2( -1, 0 )

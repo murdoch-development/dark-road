@@ -129,28 +129,38 @@ func do_skidmark(forward_velocity):
 	if linear_velocity.length() < no_turning_speed:
 		return
 		
-	var skidmark = Skidmark.instance()
+	var back_skidmark = Skidmark.instance()
+	var mid_skidmark = Skidmark.instance()
 	
 	if forward_velocity.length() > 150:
-		skidmark.lengthen()
+		back_skidmark.lengthen()
+		mid_skidmark.lengthen()
 	
-	skidmark.rotation = rotation
+	back_skidmark.rotation = rotation
+	mid_skidmark.rotation = rotation
 	if handbrake:
-		var second_skidmark = Skidmark.instance()
-		second_skidmark.rotation = rotation
+		var front_skidmark = Skidmark.instance()
+		front_skidmark.rotation = rotation
 		if forward_velocity.length() > 150:
-			second_skidmark.lengthen()
-		skidmark.position = $BackTyres.global_position
-		skidmark.position.y += 8 #Magic Number, dunno why this needs to be done but fixes some weird offset 
-		get_parent().add_child(skidmark)
-		second_skidmark.position = $FrontTyres.global_position
-		second_skidmark.position.y += 8 #Magic Number, dunno why this needs to be done but fixes some weird offset 
-		get_parent().add_child(second_skidmark)
+			front_skidmark.lengthen()
+		back_skidmark.position = $BackTyres.global_position
+		back_skidmark.position.y += 8 #Magic Number, dunno why this needs to be done but fixes some weird offset 
+		mid_skidmark.position = $MidTyres.global_position
+		mid_skidmark.position.y += 8 #Magic Number, dunno why this needs to be done but fixes some weird offset 
+		get_parent().add_child(back_skidmark)
+		get_parent().add_child(mid_skidmark)
+		front_skidmark.position = $FrontTyres.global_position
+		front_skidmark.position.y += 8 #Magic Number, dunno why this needs to be done but fixes some weird offset 
+		get_parent().add_child(front_skidmark)
 	else:
 		if dir > 0:
-			skidmark.position = $BackTyres.global_position
-			skidmark.position.y += 8 #Magic Number, dunno why this needs to be done but fixes some weird offset 
+			back_skidmark.position = $BackTyres.global_position
+			back_skidmark.position.y += 8 #Magic Number, dunno why this needs to be done but fixes some weird offset 
+			mid_skidmark.position = $MidTyres.global_position
+			mid_skidmark.position.y += 8 #Magic Number, dunno why this needs to be done but fixes some weird offset 
+			get_parent().add_child(mid_skidmark)
 		else:
-			skidmark.position = $FrontTyres.global_position
-			skidmark.position.y += 8 #Magic Number, dunno why this needs to be done but fixes some weird offset 
-		get_parent().add_child(skidmark)
+			back_skidmark.position = $FrontTyres.global_position
+			back_skidmark.position.y += 8 #Magic Number, dunno why this needs to be done but fixes some weird offset 
+			mid_skidmark.queue_free()
+		get_parent().add_child(back_skidmark)

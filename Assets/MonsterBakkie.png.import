@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/pickup_red_door_front.png-f452e820f2015ef7614e8709c3d6c4f9.stex"
+path="res://.import/MonsterBakkie.png-b90e4ae728eeb5efeee5a7f44129872c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/BakkieRed/pickup_red_door_front.png"
-dest_files=[ "res://.import/pickup_red_door_front.png-f452e820f2015ef7614e8709c3d6c4f9.stex" ]
+source_file="res://Assets/MonsterBakkie.png"
+dest_files=[ "res://.import/MonsterBakkie.png-b90e4ae728eeb5efeee5a7f44129872c.stex" ]
 
 [params]
 
