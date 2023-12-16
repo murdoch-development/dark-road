@@ -383,6 +383,16 @@ points = PoolVector2Array( 96, 0, 384, 0, 480, 576, 864, 1152, 1344, 1440, 1920,
 
 [node name="Car" parent="." instance=ExtResource( 1 )]
 position = Vector2( 960, 480 )
+acceleration_factor = 600.0
+turn_factor = 1.0
+slow_turn_factor = 0.5
+fast_turn_factor = 0.8
+very_slow_turn_factor = 0.5
+drift_turn_factor = 2.0
+opposite_drift_turn_factor = 0.9
+sideways_dynamic_friction = 0.3
+sideways_static_friction = 0.3
+handbrake_turn_factor = 2.5
 
 [node name="Camera2D" type="Camera2D" parent="Car"]
 current = true
