@@ -1,4 +1,5 @@
 extends RigidBody2D
+signal screen_shake(is_offroad, speed)
 
 var Skidmark = preload("Skidmark.tscn")
 
@@ -37,6 +38,7 @@ func _physics_process(delta):
 	apply_steering(delta)
 	apply_engine_force(delta)
 	apply_drift(delta)
+	emit_signal(is_offroad, linear_velocity.length())
 
 func get_inputs():
 	if Input.is_action_pressed("ui_left"):
