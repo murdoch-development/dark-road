@@ -5,7 +5,7 @@
 [ext_resource path="res://Assets/Sounds/tires_squal_loop.wav" type="AudioStream" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 36.4083, 94.5863 )
+extents = Vector2( 30, 62 )
 
 [sub_resource type="CapsuleShape2D" id=2]
 height = 54.3407
