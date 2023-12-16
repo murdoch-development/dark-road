@@ -28,6 +28,7 @@ func _ready():
 	pass
 
 func _physics_process(delta):
+	print(linear_damp)
 	get_inputs()
 	apply_steering(delta)
 	apply_engine_force(delta)
@@ -54,11 +55,7 @@ func get_inputs():
 func apply_engine_force(delta):
 	linear_damp = 0
 	if handbrake:
-		if linear_velocity.length() > very_slow_turning_speed:
-			var friction_direction = -linear_velocity.normalized()
-			apply_central_impulse(friction_direction * acceleration_factor * delta)
-		else:
-			linear_damp = 10
+		linear_damp = 2
 		return
 	var engine_force_vector = Vector2.UP.rotated(rotation) * acceleration_input * acceleration_factor
 	apply_central_impulse(engine_force_vector * delta)
