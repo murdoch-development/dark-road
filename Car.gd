@@ -26,6 +26,7 @@ var no_turning_speed = 10
 var min_sideways_speed_for_drift = 150
 var dir = 0
 var handbrake = false
+var offroad = false
 
 
 func _ready():
@@ -60,6 +61,8 @@ func apply_engine_force(delta):
 	if handbrake:
 		linear_damp = 2
 		return
+	if offroad:
+		linear_damp = 0.5
 	var forward_direction = Vector2.UP.rotated(rotation)
 	var forward_velocity = forward_direction * forward_direction.dot(linear_velocity)
 	if forward_velocity.length() > top_speed and acceleration_input > 0:
