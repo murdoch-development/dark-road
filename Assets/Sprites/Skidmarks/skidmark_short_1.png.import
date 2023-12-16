@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/skidmark_short_1.png-f892ed2b33c325867149fffa84b9dbaf.stex"
+path="res://.import/skidmark_short_1.png-9f2f466d235712a8dff52a25f45b7c53.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Skidmarks/skidmark_short_1.png"
-dest_files=[ "res://.import/skidmark_short_1.png-f892ed2b33c325867149fffa84b9dbaf.stex" ]
+source_file="res://Assets/Sprites/Skidmarks/skidmark_short_1.png"
+dest_files=[ "res://.import/skidmark_short_1.png-9f2f466d235712a8dff52a25f45b7c53.stex" ]
 
 [params]
 
@@ -28,6 +28,7 @@ process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
+process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=true

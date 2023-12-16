@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/pickup_red_door_rear.png-3ee3a37b1b48d43dbba330dc7593d09a.stex"
+path="res://.import/pickup_red_door_rear.png-7176a3ccfcda933c25b93aabe03bd495.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/BakkieRed/pickup_red_door_rear.png"
-dest_files=[ "res://.import/pickup_red_door_rear.png-3ee3a37b1b48d43dbba330dc7593d09a.stex" ]
+source_file="res://Assets/Sprites/BakkieRed/pickup_red_door_rear.png"
+dest_files=[ "res://.import/pickup_red_door_rear.png-7176a3ccfcda933c25b93aabe03bd495.stex" ]
 
 [params]
 
@@ -28,6 +28,7 @@ process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
+process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=true

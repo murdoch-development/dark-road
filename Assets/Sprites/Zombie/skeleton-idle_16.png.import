@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/pickup_red.png-456eeb72a21504937e00d87cfcd17c85.stex"
+path="res://.import/skeleton-idle_16.png-04c5f7be645b9cf48d53e2846a6a7117.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/BakkieRed/pickup_red.png"
-dest_files=[ "res://.import/pickup_red.png-456eeb72a21504937e00d87cfcd17c85.stex" ]
+source_file="res://Assets/Sprites/Zombie/skeleton-idle_16.png"
+dest_files=[ "res://.import/skeleton-idle_16.png-04c5f7be645b9cf48d53e2846a6a7117.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/pickup_red.png-456eeb72a21504937e00d87cfcd17c85.stex"
+path="res://.import/skeleton-attack_1.png-5897944c6c9d62a3e63526e4e80db03c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/BakkieRed/pickup_red.png"
-dest_files=[ "res://.import/pickup_red.png-456eeb72a21504937e00d87cfcd17c85.stex" ]
+source_file="res://Assets/Sprites/Zombie/skeleton-attack_1.png"
+dest_files=[ "res://.import/skeleton-attack_1.png-5897944c6c9d62a3e63526e4e80db03c.stex" ]
 
 [params]
 
