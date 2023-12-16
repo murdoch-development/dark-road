@@ -20,7 +20,7 @@ func _ready():
 		dir.list_dir_begin()
 		var filename = dir.get_next()
 		while filename != "":
-			if filename.ends_with(".wav") or filename.ends_with(".ogg"):
+			if filename.ends_with(".mp3"):
 				zombie_sounds.append(load(SOUND_DIR + filename))
 			filename = dir.get_next()
 		dir.list_dir_end()
