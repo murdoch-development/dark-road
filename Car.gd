@@ -5,6 +5,7 @@ var Skidmark = preload("Skidmark.tscn")
 export var acceleration_factor = 600.0
 export var turn_factor = 1.0
 export var slow_turn_factor = 0.5
+export var fast_turn_factor = 0.8
 export var very_slow_turn_factor = 0.5
 export var drift_turn_factor = 2.0
 export var opposite_drift_turn_factor = 0.9
@@ -12,7 +13,7 @@ export var sideways_dynamic_friction = 0.3
 export var sideways_static_friction = 0.3
 export var handbrake_turn_factor = 2.5
 
-var highspeed = 2000
+var high_speed = 2000
 var very_high_speed = 3000
 var acceleration_input = 0
 var steering_input = 0
@@ -80,6 +81,8 @@ func apply_steering(delta):
 			current_turn_factor = drift_turn_factor
 		if handbrake:
 			current_turn_factor *= 2
+		if forward_velocity.length() > high_speed and not is_drifting:
+			current_turn_factor = fast_turn_factor
 		rotation_angle -= steering_input * current_turn_factor * delta
 		if is_drifting and sideways_velocity_direction(rotation_angle) != steering_input:
 			#opposite drift
