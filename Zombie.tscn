@@ -85,7 +85,7 @@ position = Vector2( 2, -2 )
 scale = Vector2( 0.25, 0.25 )
 frames = SubResource( 2 )
 animation = "move"
-frame = 1
+frame = 2
 playing = true
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
