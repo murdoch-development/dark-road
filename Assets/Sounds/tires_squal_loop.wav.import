@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/tires_squal_loop.wav-21f630c8faf079903d809b3d0a7157ac.sample"
+
+[deps]
+
+source_file="res://Assets/Sounds/tires_squal_loop.wav"
+dest_files=[ "res://.import/tires_squal_loop.wav-21f630c8faf079903d809b3d0a7157ac.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
