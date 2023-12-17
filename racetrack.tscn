@@ -787,6 +787,7 @@ points = PoolVector2Array( 240, 0, 480, 0, 480, 480, 0, 480, 0, 240, 240, 240 )
 position = Vector2( 610, 676 )
 
 [node name="Camera2D" type="Camera2D" parent="Car"]
+position = Vector2( 5, -80 )
 current = true
 zoom = Vector2( 2, 2 )
 
