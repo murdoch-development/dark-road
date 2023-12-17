@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Assets/Sprites/life_needle.png" type="Texture" id=1]
+[ext_resource path="res://Assets/UI/Fuel Guage.png" type="Texture" id=2]
+[ext_resource path="res://BloodGuage.gd" type="Script" id=3]
+
+[node name="BloodGuage" type="Sprite"]
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 2 )
+script = ExtResource( 3 )
+
+[node name="Needle" type="Sprite" parent="."]
+rotation = 1.5708
+scale = Vector2( 0.05, 0.09 )
+z_index = 101
+texture = ExtResource( 1 )
+offset = Vector2( 450, 0 )
+
+[node name="Light2D" type="Light2D" parent="."]
+texture = ExtResource( 2 )
+color = Color( 0.415686, 0.364706, 0.14902, 1 )
+energy = 4.42
+range_height = 63.6

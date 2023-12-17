@@ -1,5 +1,9 @@
 extends RigidBody2D
 signal screen_shake(is_offroad, speed)
+signal die
+signal start
+
+var is_dead = false
 
 var Skidmark = preload("Skidmark.tscn")
 
@@ -14,8 +18,10 @@ export var sideways_dynamic_friction = 0.3
 export var sideways_static_friction = 0.3
 export var handbrake_turn_factor = 2.5
 export var top_speed = 2800
-export var max_fuel_tank = 100
-export var current_fuel_tank = 100
+export var max_fuel_tank = 1000
+export var current_fuel_tank = 500
+export var fuel_per_zombie_hit = 10
+
 var is_out_of_fuel = false
 
 var sound_change_rate = 0.01
@@ -36,10 +42,22 @@ var time_until_bloodmark_starts = 0.1
 var bloodmark_duration = 2
 var bloodmark_time_left = 0
 
+var has_started = false
+
 func _ready():
 	$EngineRevving.play()
 
+var start_time = 1
 func _physics_process(delta):
+	if not has_started: 
+		if start_time <= 0 and Input.is_action_pressed("ui_up"): 
+			has_started = true
+			emit_signal("start")
+		else: 
+			start_time -= delta
+			return
+	
+	
 	expend_fuel(delta)
 	get_inputs()
 	apply_steering(delta)
@@ -243,11 +261,16 @@ func do_skidmark(forward_velocity):
 		get_parent().add_child(back_skidmark)
 
 func rev_engine():
-	print($EngineRevving.pitch_scale)
+	# print($EngineRevving.pitch_scale)
 	if is_out_of_fuel:
 		$EngineRevving.pitch_scale = lerp($EngineRevving.pitch_scale, 0.4, 0.01)
+		if not is_dead:
+			is_dead = true
+			print("Car died")
+			emit_signal("die")
 		if $EngineRevving.pitch_scale <= 0.41:
 			$EngineRevving.playing = false
+
 		return
 	var normalized_speed = min(linear_velocity.length() / top_speed, 1)
 	var target_pitch_scale
@@ -263,6 +286,7 @@ func rev_engine():
 func hit_zombie():
 	yield(get_tree().create_timer(time_until_bloodmark_starts), "timeout")
 	bloodmark_time_left = bloodmark_duration
+	current_fuel_tank += fuel_per_zombie_hit
 	
 func make_bloodmarks(delta):
 	bloodmark_time_left -= delta
@@ -294,3 +318,9 @@ func _on_RoadDetector_body_entered(body):
 func _on_RoadDetector_body_exited(body):
 	is_offroad = true
 
+func death_effect(): 
+	for child in $headlights.get_children(): 
+		child.visible = false
+	$headlights/carlight.visible = true
+	$headlights/carlight2.visible = true
+	$EngineRevving.playing = false
