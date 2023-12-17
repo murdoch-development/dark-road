@@ -53,6 +53,7 @@ shape = SubResource( 2 )
 [node name="TyreSqueal" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
 volume_db = -9.087
+pitch_scale = 0.6
 
 [node name="ZombieAttackZone" type="Area2D" parent="."]
 visible = false

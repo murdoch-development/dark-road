@@ -822,6 +822,7 @@ texture = ExtResource( 26 )
 energy = 0.5
 range_height = 601.2
 shadow_enabled = true
+shadow_gradient_length = 1013.0
 
 [node name="carlight2" type="Light2D" parent="Car/headlights"]
 position = Vector2( 1.23199, -0.416016 )
