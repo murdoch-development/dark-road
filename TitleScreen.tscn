@@ -1,0 +1,9 @@
+[gd_scene format=2]
+
+[node name="TitleScreen" type="Node2D"]
+
+[node name="Black" type="Sprite" parent="."]
+
+[node name="Bright" type="Sprite" parent="."]
+
+[node name="Normal" type="Sprite" parent="."]
