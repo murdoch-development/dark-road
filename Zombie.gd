@@ -32,7 +32,7 @@ func _ready():
 		dir.list_dir_end()
 		# Initialize and start the timer
 		add_child(timer)
-		timer.wait_time = rand_range(1, 5)
+		timer.wait_time = rand_range(15, 30)
 		timer.connect("timeout", self, "_on_Timer_timeout")
 		timer.start()
 
@@ -40,12 +40,12 @@ func _on_Timer_timeout():
 		play_random_sound()
 
 func play_random_sound():
-	# Play a random sound
-	$AudioStreamPlayer2D.stream = zombie_sounds[randi() % zombie_sounds.size()]
-	$AudioStreamPlayer2D.play()
+	if ($AudioStreamPlayer2D.playing == false):
+		$AudioStreamPlayer2D.stream = zombie_sounds[randi() % zombie_sounds.size()]
+		$AudioStreamPlayer2D.play()
 
 	# Reset the timer
-	timer.wait_time = rand_range(1, 5)
+	timer.wait_time = rand_range(15, 30)
 	timer.start()
 
 func _physics_process(_delta):

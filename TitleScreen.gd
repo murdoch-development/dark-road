@@ -1,4 +1,6 @@
 extends Node2D
+signal next_level
+signal play_next_song
 
 var is_started = false
 var button_speed = 500
@@ -30,9 +32,9 @@ func start():
 	if is_started:
 		return
 	is_started = true
+	emit_signal("play_next_song")
 	$PlayButton.visible = false
 	$SlayButton.visible = true
-	$TitleTrackROADARK.playing = true
 	is_modulating = true
 	yield(get_tree().create_timer(9.5), "timeout")
 	$Black.visible = false
@@ -42,3 +44,6 @@ func start():
 	$Normal.visible = true
 	yield(get_tree().create_timer(7), "timeout")
 	is_moving = true
+	yield(get_tree().create_timer(5), "timeout")
+	emit_signal("next_level")
+	
