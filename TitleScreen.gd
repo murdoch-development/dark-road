@@ -15,6 +15,7 @@ func _ready():
 	$Black.visible = true
 	$BrightLights.visible = false
 	$NormalLights.visible = false
+	$SlayButton.visible = false
 	$CarPlain.visible = false
 	$CarLights.visible = false
 	$PlayButton.visible = true
@@ -29,6 +30,7 @@ func _process(delta):
 	if slay_is_modulating and slay_modulation >= 0:
 		slay_modulation -= delta / 2
 		$SlayButton.modulate = Color(1, 1, 1, slay_modulation)
+		$Description.modulate = Color(1, 1, 1, slay_modulation)
 	if bright_lights_is_modulating and bright_lights_modulation >= 0:
 		bright_lights_modulation -= delta / 2
 		$BrightLights.modulate = Color(1, 1, 1, bright_lights_modulation)

@@ -56,6 +56,8 @@ func connect_signals():
 		current_level.connect("car_die", self, "_go_to_defeat")
 	if not current_level.is_connected("end_credits",self, "_go_to_defeat"):
 		current_level.connect("end_credits", self, "_go_to_menu")
+	if not current_level.is_connected("win",self, "_go_to_win"):
+		current_level.connect("win", self, "_go_to_win")
 			
 func _go_to_defeat(): 
 	load_scene("defeat")	
@@ -65,6 +67,9 @@ func _restart_level():
 	
 func _go_to_menu():
 	load_scene("title_screen")
+
+func _go_to_win():
+	load_scene("credits")
 	
 func _next_level():
 	if current_level_name == "title_screen":
