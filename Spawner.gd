@@ -6,7 +6,7 @@ var despawn_distance = 1.5 * spawn_radius
 export var max_zombies = 150
 
 func _ready():
-  player = get_parent().get_child(0)
+  player = get_parent().get_node("Car")
   var timer = Timer.new()
   timer.wait_time = 0.05 # Set this to the desired spawn interval
   timer.one_shot = false
