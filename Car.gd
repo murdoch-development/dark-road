@@ -16,7 +16,9 @@ export var handbrake_turn_factor = 2.5
 export var top_speed = 2800
 export var max_fuel_tank = 100
 export var current_fuel_tank = 100
+var is_out_of_fuel = false
 
+var sound_change_rate = 0.01
 var high_speed = 2000
 var very_high_speed = 2600
 var acceleration_input = 0
@@ -48,6 +50,12 @@ func _physics_process(delta):
 	emit_signal("screen_shake", is_offroad, linear_velocity.length())
 
 func get_inputs():
+	if is_out_of_fuel:
+		steering_input = 0
+		acceleration_input = 0
+		linear_damp = 2
+		handbrake = false
+		return
 	if Input.is_action_pressed("ui_left"):
 		steering_input = 1
 	elif Input.is_action_pressed("ui_right"):
@@ -235,9 +243,14 @@ func do_skidmark(forward_velocity):
 		get_parent().add_child(back_skidmark)
 
 func rev_engine():
+	print($EngineRevving.pitch_scale)
+	if is_out_of_fuel:
+		$EngineRevving.pitch_scale = lerp($EngineRevving.pitch_scale, 0.4, 0.01)
+		if $EngineRevving.pitch_scale <= 0.41:
+			$EngineRevving.playing = false
+		return
 	var normalized_speed = min(linear_velocity.length() / top_speed, 1)
 	var target_pitch_scale
-	var sound_change_rate = 0.01
 	if acceleration_input == 1:
 		target_pitch_scale = 3
 	elif acceleration_input == -0.5:
@@ -271,6 +284,8 @@ func make_bloodmarks(delta):
 
 func expend_fuel(delta):
 	current_fuel_tank -= 10 * delta
+	if current_fuel_tank < 0:
+		is_out_of_fuel = true
 	
 
 func _on_RoadDetector_body_entered(body):
