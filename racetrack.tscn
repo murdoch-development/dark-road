@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=2]
+[gd_scene load_steps=87 format=2]
 
 [ext_resource path="res://Car.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Terrain/road_horizontal.png" type="Texture" id=2]
@@ -50,6 +50,7 @@
 [ext_resource path="res://Lighting/light3.png" type="Texture" id=48]
 [ext_resource path="res://Assets/Fonts/montserrat/Montserrat-Bold.ttf" type="DynamicFontData" id=49]
 [ext_resource path="res://Timer.gd" type="Script" id=50]
+[ext_resource path="res://LightningLayer.tscn" type="PackedScene" id=51]
 
 [sub_resource type="DynamicFont" id=2]
 size = 70
@@ -815,8 +816,8 @@ margin_left = 101.594
 margin_top = 69.8456
 margin_right = 238.594
 margin_bottom = 155.846
-custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.658824, 0, 0, 1 )
+custom_fonts/font = SubResource( 2 )
 text = "300"
 script = ExtResource( 50 )
 __meta__ = {
@@ -832,9 +833,9 @@ margin_left = 646.0
 margin_top = 174.0
 margin_right = 1364.0
 margin_bottom = 248.0
-custom_fonts/font = SubResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_y = -20
+custom_fonts/font = SubResource( 1 )
 text = "Press     UP     to drive"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -842,17 +843,14 @@ __meta__ = {
 
 [node name="8MinToDawn" type="Label" parent="CanvasLayer/StartMessages"]
 modulate = Color( 1, 1, 1, 0.509804 )
-margin_left = 646.0
-margin_top = 426.269
-margin_right = 1364.0
-margin_bottom = 500.269
-custom_fonts/font = SubResource( 1 )
+margin_left = 671.0
+margin_top = 426.0
+margin_right = 1389.0
+margin_bottom = 500.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_y = -20
+custom_fonts/font = SubResource( 1 )
 text = "eight Min to dawn"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="BloodIsFuel" type="Label" parent="CanvasLayer/StartMessages"]
 modulate = Color( 1, 1, 1, 0.741176 )
@@ -860,11 +858,11 @@ margin_left = 1605.0
 margin_top = 327.0
 margin_right = 2008.0
 margin_bottom = 567.0
-custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_y = 10
+custom_fonts/font = SubResource( 1 )
 text = "Blood 
 is 
 Fuel"
@@ -879,12 +877,12 @@ margin_left = 707.0
 margin_top = 809.0
 margin_right = 1177.0
 margin_bottom = 1049.0
-custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0.913725, 0.701961, 0.701961, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 0
 custom_constants/shadow_offset_y = 20
+custom_fonts/font = SubResource( 1 )
 text = "kill to survive"
 align = 1
 
@@ -951,6 +949,8 @@ texture = ExtResource( 26 )
 range_height = 2048.0
 shadow_enabled = true
 shadow_gradient_length = 1013.0
+
+[node name="LightningLayer" parent="Car/Camera2D" instance=ExtResource( 51 )]
 
 [node name="headlights" type="Node2D" parent="Car"]
 script = ExtResource( 39 )
@@ -1075,5 +1075,5 @@ max_zombies = 100
 
 [connection signal="die" from="Car" to="." method="_on_Car_die"]
 [connection signal="screen_shake" from="Car" to="Car/Camera2D" method="_on_Car_screen_shake"]
-[connection signal="start" from="Car" to="Spawner" method="_on_Car_start"]
 [connection signal="start" from="Car" to="CanvasLayer/StartMessages" method="_on_Car_start"]
+[connection signal="start" from="Car" to="Spawner" method="_on_Car_start"]

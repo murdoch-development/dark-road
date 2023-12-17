@@ -14,10 +14,10 @@ var lightning_end_time = 1
 
 var is_flashing = false
 var flashing_time = 0
-var flash_length = 0.3
+var flash_length = 0.6
 var time_til_next_flash = 0
-var time_between_flash_min = 0.1
-var time_between_flash_max = 0.6
+var time_between_flash_min = 0.3
+var time_between_flash_max = 0.8
 
 func _ready():
 	is_lightning = false
