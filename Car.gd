@@ -46,7 +46,6 @@ var bloodmark_time_left = 0
 
 var has_started = false
 var time_survived = 0
-var won = false
 
 func _ready():
 	$EngineRevving.play()
@@ -54,10 +53,6 @@ func _ready():
 var start_time = 1
 func _physics_process(delta):
 	time_survived += delta
-	if time_survived >= 5 * 60 and not won:
-		won = true
-		get_parent().emit_signal("win")
-		print("WIN")
 	if not has_started: 
 		if start_time <= 0 and Input.is_action_pressed("ui_up"): 
 			has_started = true
