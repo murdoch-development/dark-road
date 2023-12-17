@@ -3,7 +3,7 @@ extends Node2D
 signal car_die
 
 func _ready():
-	pass # Replace with function body.
+	pass # Replace with function body
 
 func _on_Car_die():
 	var explosion_pos = $Car.position
