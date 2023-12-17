@@ -79,7 +79,7 @@ func _next_level():
 		load_scene("defeat")
 	
 func _play_next_song():
-	$MetalBand/TitleTrackROADARK.play()
+	$MetalBand.switch_soundtrack(0)
 
 func fade(delta):
 	if fade_to_black and modulation < 1:
@@ -90,4 +90,4 @@ func fade(delta):
 		modulation -= delta * modulate_speed
 		if modulation < 0:
 			modulation = 0
-	$Blackout.modulate = Color(1, 1, 1, modulation)
+	$CanvasLayer/Blackout.modulate = Color(1, 1, 1, modulation)

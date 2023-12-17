@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/xenomorph.mp3-680ad0a190c1e77e33b6a297b513ccab.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sounds/Music/xenomorph.mp3"
+dest_files=[ "res://.import/xenomorph.mp3-680ad0a190c1e77e33b6a297b513ccab.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
