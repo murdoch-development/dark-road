@@ -28,7 +28,8 @@ var min_sideways_speed_for_drift = 150
 var dir = 0
 var handbrake = false
 var is_offroad = false
-var bloodmark_duration = 3
+var time_until_bloodmark_starts = 0.1
+var bloodmark_duration = 2
 var bloodmark_time_left = 0
 
 func _ready():
@@ -244,6 +245,7 @@ func rev_engine():
 	$EngineRevving.pitch_scale = lerp($EngineRevving.pitch_scale, target_pitch_scale, sound_change_rate)
 	
 func hit_zombie():
+	yield(get_tree().create_timer(time_until_bloodmark_starts), "timeout")
 	bloodmark_time_left = bloodmark_duration
 	
 func make_bloodmarks(delta):
