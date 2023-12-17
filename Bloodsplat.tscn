@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Assets/Sprites/Zombie/bloodsplats_0003.png" type="Texture" id=1]
+[ext_resource path="res://Bloodsplat.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Sounds/Attack/splat.mp3" type="AudioStream" id=3]
+
+[node name="Bloodsplat" type="Node2D"]
+z_index = -10
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+rotation = 0.785398
+texture = ExtResource( 1 )
+offset = Vector2( 40, -40 )
+
+[node name="SplatSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+
+[connection signal="finished" from="SplatSound" to="." method="_on_AudioStreamPlayer_finished"]

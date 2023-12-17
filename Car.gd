@@ -1,4 +1,9 @@
 extends RigidBody2D
+signal screen_shake(is_offroad, speed)
+signal die
+signal start
+
+var is_dead = false
 
 var Skidmark = preload("Skidmark.tscn")
 
@@ -12,9 +17,18 @@ export var opposite_drift_turn_factor = 0.9
 export var sideways_dynamic_friction = 0.3
 export var sideways_static_friction = 0.3
 export var handbrake_turn_factor = 2.5
+export var top_speed = 2800
+export var max_fuel_tank = 1000
+export var current_fuel_tank = 500
+export var fuel_per_zombie_hit = 10
+export var damage_per_zombie_attack = 10
 
+
+var is_out_of_fuel = false
+
+var sound_change_rate = 0.01
 var high_speed = 2000
-var very_high_speed = 3000
+var very_high_speed = 2600
 var acceleration_input = 0
 var steering_input = 0
 var rotation_angle = 0
@@ -25,18 +39,43 @@ var no_turning_speed = 10
 var min_sideways_speed_for_drift = 150
 var dir = 0
 var handbrake = false
+var is_offroad = false
+var time_until_bloodmark_starts = 0.1
+var bloodmark_duration = 2
+var bloodmark_time_left = 0
 
+var has_started = false
 
 func _ready():
-	pass
+	$EngineRevving.play()
 
+var start_time = 1
 func _physics_process(delta):
+	if not has_started: 
+		if start_time <= 0 and Input.is_action_pressed("ui_up"): 
+			has_started = true
+			emit_signal("start")
+		else: 
+			start_time -= delta
+			return
+	
+	
+	expend_fuel(delta)
 	get_inputs()
 	apply_steering(delta)
 	apply_engine_force(delta)
 	apply_drift(delta)
+	rev_engine()
+	make_bloodmarks(delta)
+	emit_signal("screen_shake", is_offroad, linear_velocity.length())
 
 func get_inputs():
+	if is_out_of_fuel:
+		steering_input = 0
+		acceleration_input = 0
+		linear_damp = 2
+		handbrake = false
+		return
 	if Input.is_action_pressed("ui_left"):
 		steering_input = 1
 	elif Input.is_action_pressed("ui_right"):
@@ -59,7 +98,20 @@ func apply_engine_force(delta):
 	if handbrake:
 		linear_damp = 2
 		return
-	var engine_force_vector = Vector2.UP.rotated(rotation) * acceleration_input * acceleration_factor
+	if is_offroad:
+		linear_damp = 1
+	var forward_direction = Vector2.UP.rotated(rotation)
+	var forward_velocity = forward_direction * forward_direction.dot(linear_velocity)
+	if forward_velocity.length() > top_speed and acceleration_input > 0:
+		#dont forward accelerate at top speed
+		return
+	if forward_velocity.length() > top_speed / 2 and acceleration_input < 0:
+		#dont reverse accelerate at half top speed
+		return
+	var current_acceleration_factor = acceleration_factor
+	if forward_velocity.length() > high_speed:
+		current_acceleration_factor = acceleration_factor / 2
+	var engine_force_vector = Vector2.UP.rotated(rotation) * acceleration_input * current_acceleration_factor
 	apply_central_impulse(engine_force_vector * delta)
 	
 func apply_steering(delta):
@@ -104,18 +156,18 @@ func apply_drift(delta):
 	var sideways_velocity = linear_velocity - forward_velocity
 	var sideways_friction = sideways_dynamic_friction
 	
-	print(forward_velocity.length())
 	if (sideways_velocity.length() >= min_sideways_speed_for_drift and forward_velocity.length() < 2000)\
 	or (sideways_velocity.length() >= 3 * min_sideways_speed_for_drift and forward_velocity.length() >= 2000)\
 	or (handbrake and linear_velocity.length() > very_slow_turning_speed):
 		is_drifting = true
 		if not $TyreSqueal.playing:
 			$TyreSqueal.play()
-		do_skidmark(forward_velocity)
+		do_skidmark_particles(forward_velocity)
 	else:
 		is_drifting = false
 		sideways_friction *= 1
 		$TyreSqueal.stop()
+		dont_skidmark_particles()
 	var sideways_friction_force = sideways_friction * 10 * sideways_velocity.length() * -sideways_velocity.normalized()
 	if not handbrake:
 		apply_central_impulse(sideways_friction_force * delta)
@@ -132,7 +184,44 @@ func sideways_velocity_direction(rotation_angle):
 	else:
 		return 1 # Sideways velocity is to the left
 
+func do_skidmark_particles(forward_velocity):
+	if linear_velocity.length() < no_turning_speed:
+		return
+	if handbrake:
+		$Tyres/FrontLeft.emitting = true
+		$Tyres/FrontRight.emitting = true
+		$Tyres/MidLeft.emitting = true
+		$Tyres/MidRight.emitting = true
+		$Tyres/BackLeft.emitting = true
+		$Tyres/BackRight.emitting = true
+	elif dir > 0: #going forward
+		$Tyres/FrontLeft.emitting = false
+		$Tyres/FrontRight.emitting = false
+		$Tyres/MidLeft.emitting = true
+		$Tyres/MidRight.emitting = true
+		$Tyres/BackLeft.emitting = true
+		$Tyres/BackRight.emitting = true
+	else: #going backward
+		$Tyres/FrontLeft.emitting = true
+		$Tyres/FrontRight.emitting = true
+		$Tyres/MidLeft.emitting = false
+		$Tyres/MidRight.emitting = false
+		$Tyres/BackLeft.emitting = false
+		$Tyres/BackRight.emitting = false
+
+func dont_skidmark_particles():
+	$Tyres/FrontLeft.emitting = false
+	$Tyres/FrontRight.emitting = false
+	$Tyres/MidLeft.emitting = false
+	$Tyres/MidRight.emitting = false
+	$Tyres/BackLeft.emitting = false
+	$Tyres/BackRight.emitting = false
+
+
 func do_skidmark(forward_velocity):
+	
+	############ LEGACY CODE BEING SKIPPED BELOW ##############
+	return
 
 	if linear_velocity.length() < no_turning_speed:
 		return
@@ -172,3 +261,73 @@ func do_skidmark(forward_velocity):
 			back_skidmark.position.y += 10 #Magic Number, dunno why this needs to be done but fixes some weird offset 
 			mid_skidmark.queue_free()
 		get_parent().add_child(back_skidmark)
+
+func rev_engine():
+	# print($EngineRevving.pitch_scale)
+	if is_out_of_fuel:
+		$EngineRevving.pitch_scale = lerp($EngineRevving.pitch_scale, 0.4, 0.01)
+		if not is_dead:
+			is_dead = true
+			print("Car died")
+			emit_signal("die")
+		if $EngineRevving.pitch_scale <= 0.41:
+			$EngineRevving.playing = false
+
+		return
+	var normalized_speed = min(linear_velocity.length() / top_speed, 1)
+	var target_pitch_scale
+	if acceleration_input == 1:
+		target_pitch_scale = 3
+	elif acceleration_input == -0.5:
+		target_pitch_scale = 1.5
+	else:
+		sound_change_rate = 0.1
+		target_pitch_scale = 0.6 + 2.4 * normalized_speed
+	$EngineRevving.pitch_scale = lerp($EngineRevving.pitch_scale, target_pitch_scale, sound_change_rate)
+	
+func hit_zombie():
+	yield(get_tree().create_timer(time_until_bloodmark_starts), "timeout")
+	bloodmark_time_left = bloodmark_duration
+	current_fuel_tank += fuel_per_zombie_hit
+	
+func make_bloodmarks(delta):
+	bloodmark_time_left -= delta
+	if bloodmark_time_left > 0:
+		$Tyres/BloodFrontLeft.emitting = true
+		$Tyres/BloodFrontRight.emitting = true
+		$Tyres/BloodMidLeft.emitting = true
+		$Tyres/BloodMidRight.emitting = true
+		$Tyres/BloodBackLeft.emitting = true
+		$Tyres/BloodBackRight.emitting = true
+	else:
+		$Tyres/BloodFrontLeft.emitting = false
+		$Tyres/BloodFrontRight.emitting = false
+		$Tyres/BloodMidLeft.emitting = false
+		$Tyres/BloodMidRight.emitting = false
+		$Tyres/BloodBackLeft.emitting = false
+		$Tyres/BloodBackRight.emitting = false
+
+
+func expend_fuel(delta):
+	current_fuel_tank -= 10 * delta
+	if current_fuel_tank < 0:
+		is_out_of_fuel = true
+	
+
+func _on_RoadDetector_body_entered(body):
+	is_offroad = false
+
+func _on_RoadDetector_body_exited(body):
+	is_offroad = true
+
+func death_effect(): 
+	for child in $headlights.get_children(): 
+		child.visible = false
+	$headlights/carlight.visible = true
+	$headlights/carlight2.visible = true
+	$EngineRevving.playing = false
+
+func _on_zombie_attack(): 
+	current_fuel_tank -= damage_per_zombie_attack
+	if current_fuel_tank < 0:
+		is_out_of_fuel = true

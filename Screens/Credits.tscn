@@ -1,0 +1,118 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Assets/Poster/Lights NoText.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Poster/TextOnly.png" type="Texture" id=2]
+[ext_resource path="res://Screens/CreditsText.gd" type="Script" id=3]
+[ext_resource path="res://Assets/Fonts/skull_blood/SkullBloodDemoRegular.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Assets/Fonts/montserrat/Montserrat-Regular.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://Screens/Credits.gd" type="Script" id=6]
+[ext_resource path="res://Assets/Sounds/Music/ROADARK - Title Track.wav" type="AudioStream" id=7]
+
+[sub_resource type="DynamicFont" id=1]
+size = 64
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 32
+font_data = ExtResource( 5 )
+
+[node name="Credits" type="Node2D"]
+script = ExtResource( 6 )
+
+[node name="Background" type="Sprite" parent="."]
+z_index = -100
+texture = ExtResource( 1 )
+centered = false
+
+[node name="Label" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+
+[node name="Text" type="Node2D" parent="."]
+script = ExtResource( 3 )
+
+[node name="Title" type="Sprite" parent="Text"]
+texture = ExtResource( 2 )
+centered = false
+
+[node name="Title2" type="Sprite" parent="Text"]
+position = Vector2( 0, 3400 )
+texture = ExtResource( 2 )
+centered = false
+
+[node name="Main Credits" type="Label" parent="Text"]
+margin_left = 2.0
+margin_top = 474.0
+margin_right = 1918.0
+margin_bottom = 11020.0
+custom_colors/font_color = Color( 0.643137, 0.631373, 0.588235, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "Kim
+
+Liam
+
+Rob
+
+Daniel
+
+Mark"
+align = 1
+autowrap = true
+
+[node name="Other Credits" type="Label" parent="Text"]
+margin_left = -1.0
+margin_top = 1227.0
+margin_right = 1915.0
+margin_bottom = 11773.0
+custom_colors/font_color = Color( 0.643137, 0.631373, 0.588235, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "Default Zombie    Riley Gombart or ChessMasterRiley    https://opengameart.org/content/animated-top-down-zombie
+
+Default Road    http://www.adebgamesoft.be/    https://opengameart.org/content/top-down-road-tileset
+
+Default Pickup Truck        https://opengameart.org/content/car-pickup
+
+Trees, Bushes, Foliage    Chabull    https://opengameart.org/content/trees-and-bushes
+
+General Cars    Suijit1717    https://opengameart.org/content/free-top-down-car-sprites-by-unlucky-studio
+
+skidmarks    Kenney    https://www.kenney.nl/assets/racing-pack
+
+Gas Guage        https://opengameart.org/content/gas-gauge
+
+Blood Tire Splatter        https://opengameart.org/content/simple-blood-splatter
+
+Needle        https://pixabay.com/vectors/needle-syringe-hypodermic-shot-31827/
+
+Zombie Death Splatter     PWL    https://opengameart.org/content/blood-splats
+
+explosion    Bleed - http://remusprites.carbonmade.com/    https://opengameart.org/content/simple-explosion-bleeds-game-art
+
+Dirt 1024px    ForKotLow    https://opengameart.org/content/dirt-ground-seamless-free
+
+Screen Shake    KidsCanCode    https://kidscancode.org/godot_recipes/3.x/2d/screen_shake/index.html
+
+Horde Of Terrifying Zombies Swarm Evoking Halloween Horror 3d Render Background      pngtree.com    https://pngtree.com/freebackground/horde-of-terrifying-zombies-swarm-evoking-halloween-horror-3d-render_11625334.html
+
+Tracing Blood by Veredgf    Veredgf    https://www.dafont.com/tracing-blood.font
+
+Skull Blood by Noah Type    Noah Type    https://www.dafont.com/skull-blood.font
+
+Monsterrat Font    Julieta Ulanovsky    https://www.1001freefonts.com/montserrat.font
+
+Sounds        
+
+Zombie Sounds    FilmMasters    https://www.youtube.com/watch?v=8CvToeXz1xQ&ab_channel=FilmMasters
+
+Car Sound Source    Swedish 12valve    https://www.youtube.com/watch?v=3qdsD1fN__8&ab_channel=Swedish12valve
+
+Tilte Track Source    Karl Casey @ White Bat Audio    https://www.youtube.com/watch?v=58PCM-x7jlg&ab_channel=WhiteBatAudio
+
+Explosion        https://freesound.org/people/Iwiploppenisse/sounds/156031/"
+align = 1
+autowrap = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+
+[connection signal="end_credits" from="Text" to="." method="_on_Text_end_credits"]
