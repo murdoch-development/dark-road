@@ -4,8 +4,8 @@
 [ext_resource path="res://Assets/Sprites/Title/title_red_lights_bright.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Sprites/Title/title_black.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Sprites/Title/title_red_lights_normal.png" type="Texture" id=4]
-[ext_resource path="res://Assets/UI/slaybutton.png" type="Texture" id=6]
-[ext_resource path="res://Assets/UI/playbutton.png" type="Texture" id=7]
+[ext_resource path="res://Assets/UI/SlayButton.png" type="Texture" id=6]
+[ext_resource path="res://Assets/UI/PlayButton.png" type="Texture" id=7]
 [ext_resource path="res://Assets/UI/ROADARK.png" type="Texture" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]

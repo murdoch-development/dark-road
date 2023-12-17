@@ -1,5 +1,6 @@
 extends RigidBody2D
 signal screen_shake(is_offroad, speed)
+signal die
 
 var Skidmark = preload("Skidmark.tscn")
 
@@ -248,6 +249,7 @@ func rev_engine():
 		$EngineRevving.pitch_scale = lerp($EngineRevving.pitch_scale, 0.4, 0.01)
 		if $EngineRevving.pitch_scale <= 0.41:
 			$EngineRevving.playing = false
+			emit_signal("die")
 		return
 	var normalized_speed = min(linear_velocity.length() / top_speed, 1)
 	var target_pitch_scale
