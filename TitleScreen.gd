@@ -34,7 +34,6 @@ func _process(delta):
 	if bright_lights_is_modulating and bright_lights_modulation >= 0:
 		bright_lights_modulation -= delta / 2
 		$BrightLights.modulate = Color(1, 1, 1, bright_lights_modulation)
-		print("light: ", bright_lights_modulation)
 	if is_moving and $LogoROADARK.position.y < 0:
 		$LogoROADARK.position.y += delta * button_speed
 	if Input.is_action_pressed("ui_cancel") and not skip_level:

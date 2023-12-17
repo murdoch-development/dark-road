@@ -86,7 +86,7 @@ shape = SubResource( 5 )
 
 [node name="EngineRevving" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 5 )
-volume_db = -8.5
+volume_db = -9.5
 pitch_scale = 0.6
 
 [node name="Tyres" type="Node2D" parent="."]
