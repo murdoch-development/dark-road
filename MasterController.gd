@@ -4,6 +4,7 @@ var scenes = {
 	"race_track": "res://racetrack.tscn",
 	"title_screen": "res://TitleScreen.tscn",
 	"defeat": "res://Screens/Defeat.tscn",
+	"credits": "res://Screens/Credits.tscn",
 }
 
 #var scene_arr = [] #[0: "title_screen", 1: "racetrack"] etc
@@ -15,7 +16,6 @@ var modulate_speed = 4
 var fade_to_black = false
 
 func _ready():
-	var i = 0
 	#for key in scenes.keys():
 	#	scene_arr.append(key)
 	current_level_name = "title_screen"
@@ -26,6 +26,10 @@ func _ready():
 
 func _process(delta):
 	fade(delta)
+	
+func _physics_process(delta):
+	pass
+	# $TitleTrackROADARK.volume_db.lerp
 
 func load_scene(scene_name):
 	fade_to_black = true
@@ -50,7 +54,9 @@ func connect_signals():
 		current_level.connect("go_to_menu", self, "_go_to_menu")
 	if not current_level.is_connected("car_die",self, "_go_to_defeat"):
 		current_level.connect("car_die", self, "_go_to_defeat")
-	
+	if not current_level.is_connected("end_credits",self, "_go_to_defeat"):
+		current_level.connect("end_credits", self, "_go_to_menu")
+			
 func _go_to_defeat(): 
 	load_scene("defeat")	
 	

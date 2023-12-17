@@ -1,5 +1,10 @@
 extends AnimationPlayer
 
+func _process(delta):
+	$AudioStreamPlayer2D.position = get_parent().position
+	$AnimatedSprite.position = get_parent().position
+	$Light2D.position = get_parent().position
+
 func _ready():
 	yield(get_tree().create_timer(2), "timeout")
 	self.get_animation("Explosion").loop = false
