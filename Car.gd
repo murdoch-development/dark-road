@@ -39,6 +39,7 @@ func _physics_process(delta):
 	apply_engine_force(delta)
 	apply_drift(delta)
 	emit_signal("screen_shake", is_offroad, linear_velocity.length())
+	print(linear_velocity.length())
 
 func get_inputs():
 	if Input.is_action_pressed("ui_left"):
@@ -190,10 +191,8 @@ func do_skidmark(forward_velocity):
 		get_parent().add_child(back_skidmark)
 
 func _on_RoadDetector_body_entered(body):
-	print('entered')
 	is_offroad = false
 
 func _on_RoadDetector_body_exited(body):
-	print('exited')
 	is_offroad = true
 

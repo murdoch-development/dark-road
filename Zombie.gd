@@ -3,17 +3,21 @@ extends RigidBody2D
 var zombie_sounds = []
 var timer = Timer.new()
 const SOUND_DIR = "res://Assets/Sounds/Zombie/"
-var car_node: RigidBody2D
 var idle_distance = 1000  # The distance at which the zombie starts moving towards the car
 var zombie_top_speed = 300  # The maximum speed of the zombie
 var zombie_acceleration_factor = 1
 var is_attacking = false
+var player_car
+var speed_to_kill = 500
+var zombie_death_time = 0.1
+var Bloodsplat = preload("Bloodsplat.tscn")
+var is_dead = false
 
 # Preload the zombie sound effects
 func _ready():
 	$AnimatedSprite.play("move")
-	car_node = get_parent().get_parent().get_node("Car")
 	linear_damp = 1
+	player_car = get_parent().get_parent().get_node("Car")
 
 	var dir = Directory.new()
 	if dir.open(SOUND_DIR) == OK:
@@ -43,12 +47,22 @@ func play_random_sound():
 	timer.start()
 
 func _physics_process(_delta):
-	var car_position = car_node.global_position
+	var car_position = player_car.global_position
 	var distance = global_position.distance_to(car_position)
 	# if distance > idle_distance:
 	#     idle()
 	# else:
-	if not is_attacking:
+	if is_attacking:
+		var direction_to_zombie = (position - player_car.position).normalized()
+		var speed_to_zombie = player_car.linear_velocity.dot(direction_to_zombie)
+		if speed_to_zombie >= speed_to_kill and not is_dead:
+			is_dead = true
+			var bloodsplat = Bloodsplat.instance()
+			get_parent().add_child(bloodsplat)
+			bloodsplat.position = position
+			yield(get_tree().create_timer(zombie_death_time), "timeout")
+			queue_free()
+	else:
 		move_towards_car(car_position)
 
 func idle():

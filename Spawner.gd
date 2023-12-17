@@ -1,9 +1,9 @@
 extends YSort
 
 var player = null
-var spawn_radius = 1000
+var spawn_radius = 2400
 var despawn_distance = 1.5 * spawn_radius
-var max_zombies = 150
+export var max_zombies = 150
 
 func _ready():
   player = get_parent().get_child(0)
@@ -26,5 +26,5 @@ func spawn():
 		return
 	var enemy = load("res://Zombie.tscn").instance()
 	add_child(enemy)
-	var angle = rand_range(-PI/2, PI/2) + player.rotation - PI/2
+	var angle = rand_range(-PI/2, PI/2) + player.linear_velocity.normalized().angle()
 	enemy.position = player.position + Vector2(spawn_radius, 0).rotated(angle)
