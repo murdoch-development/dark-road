@@ -28,11 +28,11 @@ var min_sideways_speed_for_drift = 150
 var dir = 0
 var handbrake = false
 var is_offroad = false
-
+var bloodmark_duration = 3
+var bloodmark_time_left = 0
 
 func _ready():
 	$EngineRevving.play()
-	pass
 
 func _physics_process(delta):
 	get_inputs()
@@ -40,6 +40,7 @@ func _physics_process(delta):
 	apply_engine_force(delta)
 	apply_drift(delta)
 	rev_engine()
+	make_bloodmarks(delta)
 	emit_signal("screen_shake", is_offroad, linear_velocity.length())
 
 func get_inputs():
@@ -242,6 +243,25 @@ func rev_engine():
 		target_pitch_scale = 0.6 + 2.4 * normalized_speed
 	$EngineRevving.pitch_scale = lerp($EngineRevving.pitch_scale, target_pitch_scale, sound_change_rate)
 	
+func hit_zombie():
+	bloodmark_time_left = bloodmark_duration
+	
+func make_bloodmarks(delta):
+	bloodmark_time_left -= delta
+	if bloodmark_time_left > 0:
+		$Tyres/BloodFrontLeft.emitting = true
+		$Tyres/BloodFrontRight.emitting = true
+		$Tyres/BloodMidLeft.emitting = true
+		$Tyres/BloodMidRight.emitting = true
+		$Tyres/BloodBackLeft.emitting = true
+		$Tyres/BloodBackRight.emitting = true
+	else:
+		$Tyres/BloodFrontLeft.emitting = false
+		$Tyres/BloodFrontRight.emitting = false
+		$Tyres/BloodMidLeft.emitting = false
+		$Tyres/BloodMidRight.emitting = false
+		$Tyres/BloodBackLeft.emitting = false
+		$Tyres/BloodBackRight.emitting = false
 
 
 

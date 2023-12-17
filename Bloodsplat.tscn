@@ -8,4 +8,6 @@ z_index = -10
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
+rotation = 0.785398
 texture = ExtResource( 1 )
+offset = Vector2( 40, -40 )

@@ -1324,4 +1324,3 @@ position = Vector2( -7696, 327 )
 texture = ExtResource( 2 )
 
 [node name="Spawner" parent="." instance=ExtResource( 4 )]
-max_zombies = 0

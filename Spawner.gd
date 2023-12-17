@@ -7,7 +7,6 @@ export var max_zombies = 150
 
 func _ready():
   player = get_parent().get_child(0)
-  print(player.position)
   var timer = Timer.new()
   timer.wait_time = 0.05 # Set this to the desired spawn interval
   timer.one_shot = false

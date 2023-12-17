@@ -16,6 +16,7 @@ var is_dead = false
 # Preload the zombie sound effects
 func _ready():
 	zombie_top_speed = rand_range(100, 500)
+	zombie_top_speed = 0
 	$AnimatedSprite.play("move")
 	linear_damp = 1
 	player_car = get_parent().get_parent().get_node("Car")
@@ -61,7 +62,9 @@ func _physics_process(_delta):
 			var bloodsplat = Bloodsplat.instance()
 			get_parent().add_child(bloodsplat)
 			bloodsplat.position = position
+			bloodsplat.rotation = rad2deg(player_car.linear_velocity.angle())
 			yield(get_tree().create_timer(zombie_death_time), "timeout")
+			player_car.hit_zombie()
 			queue_free()
 	else:
 		move_towards_car(car_position)
@@ -87,9 +90,7 @@ func move_towards_car(car_position):
 func _on_Area2D_area_entered(area):
 	is_attacking = true
 	$AnimatedSprite.play("attack")
-	print('hit car')
 
 func _on_Area2D_area_exited(area):
 	$AnimatedSprite.play("move")
 	is_attacking = false
-	print('hit car')
