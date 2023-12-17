@@ -2,8 +2,9 @@ extends Node
 
 
 var scenes = {
-	 "title_screen": "res://TitleScreen.tscn",
-	 "race_track": "res://racetrack.tscn",
+	"title_screen": "res://TitleScreen.tscn",
+	"race_track": "res://racetrack.tscn",
+	"defeat": "res://Screens/Defeat.tscn",
 }
 
 var scene_arr = [] #[0: "title_screen", 1: "racetrack"] etc
@@ -40,7 +41,15 @@ func load_scene(scene_name):
 func connect_signals():
 	current_level.connect("next_level", self, "_next_level")
 	current_level.connect("play_next_song", self, "_play_next_song")
-
+	current_level.connect("restart_level", self, "_restart_level")
+	current_level.connect("go_to_menu", self, "_go_to_menu")
+	
+func _restart_level():
+	pass
+	
+func _go_to_menu():
+	pass
+	
 func _next_level():
 	scene_index += 1
 	load_scene(scene_arr[scene_index])
