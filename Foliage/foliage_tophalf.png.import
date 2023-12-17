@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/life_needle.png-89b92ccf11ee33c3cd8fa4c03dbe1d72.stex"
+path="res://.import/foliage_tophalf.png-c2c230efb1c6b3d3193b181bd8afcba9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/life_needle.png"
-dest_files=[ "res://.import/life_needle.png-89b92ccf11ee33c3cd8fa4c03dbe1d72.stex" ]
+source_file="res://Foliage/foliage_tophalf.png"
+dest_files=[ "res://.import/foliage_tophalf.png-c2c230efb1c6b3d3193b181bd8afcba9.stex" ]
 
 [params]
 
