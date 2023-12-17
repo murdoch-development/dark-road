@@ -4,8 +4,8 @@ var zombie_sounds = []
 var timer = Timer.new()
 const SOUND_DIR = "res://Assets/Sounds/Zombie/"
 var idle_distance = 1000  # The distance at which the zombie starts moving towards the car
-var zombie_top_speed = 300  # The maximum speed of the zombie
-var zombie_acceleration_factor = 1
+var zombie_top_speed = 500  # The maximum speed of the zombie
+var zombie_acceleration_factor = 10
 var is_attacking = false
 var player_car
 var speed_to_kill = 500
@@ -15,6 +15,7 @@ var is_dead = false
 
 # Preload the zombie sound effects
 func _ready():
+	zombie_top_speed = rand_range(100, 500)
 	$AnimatedSprite.play("move")
 	linear_damp = 1
 	player_car = get_parent().get_parent().get_node("Car")

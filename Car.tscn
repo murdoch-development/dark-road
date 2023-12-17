@@ -38,9 +38,11 @@ texture = ExtResource( 1 )
 offset = Vector2( 8, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource( 1 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( 0, -92.8426 )
 rotation = 1.5708
 shape = SubResource( 2 )
@@ -50,6 +52,7 @@ stream = ExtResource( 3 )
 volume_db = -9.087
 
 [node name="ZombieAttackZone" type="Area2D" parent="."]
+visible = false
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ZombieAttackZone"]
@@ -68,6 +71,7 @@ rotation = 1.5708
 shape = SubResource( 4 )
 
 [node name="RoadDetector" type="Area2D" parent="."]
+visible = false
 collision_layer = 32
 collision_mask = 32
 
