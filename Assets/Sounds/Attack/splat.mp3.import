@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/splat.mp3-358ef6dc6b31fa5e6627a31d45768228.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sounds/Attack/splat.mp3"
+dest_files=[ "res://.import/splat.mp3-358ef6dc6b31fa5e6627a31d45768228.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

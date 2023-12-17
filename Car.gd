@@ -21,6 +21,8 @@ export var top_speed = 2800
 export var max_fuel_tank = 1000
 export var current_fuel_tank = 500
 export var fuel_per_zombie_hit = 10
+export var damage_per_zombie_attack = 10
+
 
 var is_out_of_fuel = false
 
@@ -324,3 +326,8 @@ func death_effect():
 	$headlights/carlight.visible = true
 	$headlights/carlight2.visible = true
 	$EngineRevving.playing = false
+
+func _on_zombie_attack(): 
+	current_fuel_tank -= damage_per_zombie_attack
+	if current_fuel_tank < 0:
+		is_out_of_fuel = true

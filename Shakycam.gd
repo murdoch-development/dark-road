@@ -39,7 +39,6 @@ func shake():
 
 func _on_Car_screen_shake(is_offroad, speed):
 	var trauma_target = speed/3000
-	print("Speed " + str(trauma_target) + " and trauma: " + str(trauma))
 	if is_offroad: 
 		if trauma < trauma_target:
 			add_trauma(trauma_target)

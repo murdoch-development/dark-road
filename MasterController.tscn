@@ -15,7 +15,7 @@ volume_db = -16.0
 
 [node name="Blackout" type="Sprite" parent="."]
 modulate = Color( 0, 0, 0, 1 )
-position = Vector2( 1008, 512 )
-scale = Vector2( 500, 500 )
+position = Vector2( 1008, 8939 )
+scale = Vector2( 500, 1202.25 )
 z_index = 1000
 texture = ExtResource( 3 )

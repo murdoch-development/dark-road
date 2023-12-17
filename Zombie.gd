@@ -1,5 +1,7 @@
 extends RigidBody2D
 
+signal zombie_attack
+
 var zombie_sounds = []
 var timer = Timer.new()
 const SOUND_DIR = "res://Assets/Sounds/Zombie/"
@@ -58,16 +60,20 @@ func _physics_process(_delta):
 		var direction_to_zombie = (position - player_car.position).normalized()
 		var speed_to_zombie = player_car.linear_velocity.dot(direction_to_zombie)
 		if speed_to_zombie >= speed_to_kill and not is_dead:
-			is_dead = true
-			var bloodsplat = Bloodsplat.instance()
-			get_parent().add_child(bloodsplat)
-			bloodsplat.position = position
-			bloodsplat.rotation = rad2deg(player_car.linear_velocity.angle())
-			yield(get_tree().create_timer(zombie_death_time), "timeout")
-			player_car.hit_zombie()
-			queue_free()
+			zombie_die()
 	else:
 		move_towards_car(car_position)
+
+func zombie_die(): 
+	is_dead = true
+	var bloodsplat = Bloodsplat.instance()
+	get_parent().add_child(bloodsplat)
+	bloodsplat.position = position
+	bloodsplat.rotation = rad2deg(player_car.linear_velocity.angle())
+
+	yield(get_tree().create_timer(zombie_death_time), "timeout")
+	player_car.hit_zombie()
+	queue_free()
 
 func idle():
 	$AnimatedSprite.play("idle")
@@ -88,9 +94,43 @@ func move_towards_car(car_position):
 	rotation = atan2(direction.y, direction.x)
 
 func _on_Area2D_area_entered(area):
-	is_attacking = true
-	$AnimatedSprite.play("attack")
+	if not is_attacking:
+		is_attacking = true
+		$AnimatedSprite.play("attack_ready")
 
 func _on_Area2D_area_exited(area):
 	$AnimatedSprite.play("move")
 	is_attacking = false
+	$SlamSound.playing = false
+
+func _on_AnimatedSprite_animation_finished():
+	if is_attacking:
+		if $AnimatedSprite.animation == "idle":
+			$AnimatedSprite.play("attack_ready")
+		if $AnimatedSprite.animation == "attack_ready":
+			$AnimatedSprite.play("attack_slam")
+			emit_signal("zombie_attack")
+			$SlamSound.playing = true
+			print("ZOMBIE_ATTACK")
+		elif $AnimatedSprite.animation == "attack_slam": 
+			$AnimatedSprite.play("idle")
+			$SlamSound.playing = false
+		
+			
+func _on_SlamSound_finished():
+	$SlamSound.playing = false
+	
+	
+func _on_car_explode(): 
+	is_dead = true
+	var bloodsplat = Bloodsplat.instance()
+	bloodsplat.suppress_sound()
+	get_parent().add_child(bloodsplat)
+	bloodsplat.position = position
+
+	var car_position = player_car.global_position
+	bloodsplat.rotation = (global_position - car_position).normalized().angle()
+	
+	yield(get_tree().create_timer(zombie_death_time), "timeout")
+	queue_free()
+

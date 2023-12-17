@@ -8,7 +8,11 @@ var lifetime = 10
 var start_fading_after = 5
 var timer = 0
 
+var should_play_sound = true
+
 func _ready():
+	if should_play_sound: 
+		$SplatSound.playing = true
 	yield(get_tree().create_timer(lifetime), "timeout")
 	queue_free()
 
@@ -19,3 +23,9 @@ func _process(delta):
 	if timer > start_fading_after:
 		modulation -= delta / modulation_factor
 	modulate = Color(color_modulation, color_modulation, color_modulation, modulation)
+	
+func suppress_sound(): 
+	should_play_sound = false
+
+func _on_AudioStreamPlayer_finished():
+	$SplatSound.playing = false

@@ -1,6 +1,6 @@
 extends YSort
 
-var player = null
+onready var player = get_parent().get_node("Car")
 var spawn_radius = 2400
 var despawn_distance = 1.5 * spawn_radius
 export var max_zombies = 150
@@ -23,6 +23,8 @@ func spawn():
 	if get_child_count() > max_zombies:
 		return
 	var enemy = load("res://Zombie.tscn").instance()
+	enemy.connect("zombie_attack", player, "_on_zombie_attack")
+	get_parent().connect("explode", enemy, "_on_car_explode")
 	add_child(enemy)
 	if(player.linear_velocity.length() > 1500):
 		var angle = rand_range(-PI/2, PI/2) + player.linear_velocity.normalized().angle() - PI/2
@@ -33,7 +35,7 @@ func spawn():
 	else:
 		var angle = rand_range(0, 2 * PI)
 		enemy.position = player.position + Vector2(spawn_radius, 0).rotated(angle)
-
+	
 
 func _on_Car_start():
 	player = get_parent().get_node("Car")
