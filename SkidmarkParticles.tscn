@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Assets/Sprites/Skidmarks/skidmark_square.png" type="Texture" id=1]
+
+[node name="SkidmarkParticles" type="CPUParticles2D"]
+texture = ExtResource( 1 )
+gravity = Vector2( 0, 0 )

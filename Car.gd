@@ -193,7 +193,7 @@ func do_skidmark(forward_velocity):
 		get_parent().add_child(back_skidmark)
 
 func rev_engine():
-    var normalized_speed = min(linear_velocity.length() / top_speed, 1)
+	var normalized_speed = min(linear_velocity.length() / top_speed, 1)
 	var target_pitch_scale
 	var sound_change_rate = 0.01
 	if acceleration_input == 1:
@@ -203,7 +203,7 @@ func rev_engine():
 	else:
 		sound_change_rate = 0.1
 		target_pitch_scale = 0.6 + 2.4 * normalized_speed
-    $EngineRevving.pitch_scale = lerp($EngineRevving.pitch_scale, target_pitch_scale, sound_change_rate)
+	$EngineRevving.pitch_scale = lerp($EngineRevving.pitch_scale, target_pitch_scale, sound_change_rate)
 	
 
 
