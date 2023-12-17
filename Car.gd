@@ -1,6 +1,7 @@
 extends RigidBody2D
 signal screen_shake(is_offroad, speed)
 signal die
+signal start
 
 var is_dead = false
 
@@ -41,10 +42,22 @@ var time_until_bloodmark_starts = 0.1
 var bloodmark_duration = 2
 var bloodmark_time_left = 0
 
+var has_started = false
+
 func _ready():
 	$EngineRevving.play()
 
+var start_time = 1
 func _physics_process(delta):
+	if not has_started: 
+		if start_time <= 0 and Input.is_action_pressed("ui_up"): 
+			has_started = true
+			emit_signal("start")
+		else: 
+			start_time -= delta
+			return
+	
+	
 	expend_fuel(delta)
 	get_inputs()
 	apply_steering(delta)

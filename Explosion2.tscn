@@ -94,4 +94,5 @@ frames = SubResource( 15 )
 scale = Vector2( 2, 2 )
 z_index = 90
 texture = ExtResource( 3 )
-energy = 0.0
+texture_scale = 2.0
+energy = 2.0
