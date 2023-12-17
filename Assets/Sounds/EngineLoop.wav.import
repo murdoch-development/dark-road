@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/EngineLoop.wav-72024f8a27a8389ae38446bc9b109385.sample"
+
+[deps]
+
+source_file="res://Assets/Sounds/EngineLoop.wav"
+dest_files=[ "res://.import/EngineLoop.wav-72024f8a27a8389ae38446bc9b109385.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

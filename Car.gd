@@ -31,6 +31,7 @@ var is_offroad = false
 
 
 func _ready():
+	$EngineRevving.play()
 	pass
 
 func _physics_process(delta):
