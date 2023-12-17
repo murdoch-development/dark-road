@@ -39,6 +39,7 @@ func _physics_process(delta):
 	apply_steering(delta)
 	apply_engine_force(delta)
 	apply_drift(delta)
+	rev_engine()
 	emit_signal("screen_shake", is_offroad, linear_velocity.length())
 	print(linear_velocity.length())
 
@@ -190,6 +191,22 @@ func do_skidmark(forward_velocity):
 			back_skidmark.position.y += 10 #Magic Number, dunno why this needs to be done but fixes some weird offset 
 			mid_skidmark.queue_free()
 		get_parent().add_child(back_skidmark)
+
+func rev_engine():
+    var normalized_speed = min(linear_velocity.length() / top_speed, 1)
+	var target_pitch_scale
+	var sound_change_rate = 0.01
+	if acceleration_input == 1:
+		target_pitch_scale = 3
+	elif acceleration_input == -0.5:
+		target_pitch_scale = 1.5
+	else:
+		sound_change_rate = 0.1
+		target_pitch_scale = 0.6 + 2.4 * normalized_speed
+    $EngineRevving.pitch_scale = lerp($EngineRevving.pitch_scale, target_pitch_scale, sound_change_rate)
+	
+
+
 
 func _on_RoadDetector_body_entered(body):
 	is_offroad = false

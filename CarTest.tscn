@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Car.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Tiles/Placeholders/sand.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Tiles/Placeholders/road.png" type="Texture" id=3]
 [ext_resource path="res://Spawner.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Explosion.tscn" type="PackedScene" id=5]
 
 [node name="CarTest" type="Node2D"]
 position = Vector2( 4, -12 )
@@ -16,8 +15,6 @@ position = Vector2( 1, -1 )
 current = true
 
 [node name="Listener2D" type="Node" parent="Car"]
-
-[node name="Explosion2" parent="Car" instance=ExtResource( 5 )]
 
 [node name="Background" type="Node2D" parent="."]
 position = Vector2( -15, -45 )
@@ -1327,3 +1324,4 @@ position = Vector2( -7696, 327 )
 texture = ExtResource( 2 )
 
 [node name="Spawner" parent="." instance=ExtResource( 4 )]
+max_zombies = 40
