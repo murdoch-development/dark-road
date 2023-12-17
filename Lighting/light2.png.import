@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/life_needle.png-89b92ccf11ee33c3cd8fa4c03dbe1d72.stex"
+path="res://.import/light2.png-97f6d5dc69c1f2f691ed810426c0baca.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/life_needle.png"
-dest_files=[ "res://.import/life_needle.png-89b92ccf11ee33c3cd8fa4c03dbe1d72.stex" ]
+source_file="res://Lighting/light2.png"
+dest_files=[ "res://.import/light2.png-97f6d5dc69c1f2f691ed810426c0baca.stex" ]
 
 [params]
 
