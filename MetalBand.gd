@@ -1,6 +1,6 @@
 extends Node
 
-var soundtracks = ["res://Assets/Sounds/Music/ROADARK - Title Track.wav", "res://Assets/Sounds/Music/cult_of_the_skull.mp3", "res://Assets/Sounds/Music/xenomorph.mp3", "res://Assets/Sounds/Music/haunting_of_the_flesh.mp3", "res://Assets/Sounds/Music/plauge_rat.mp3"]
+var soundtracks = ["res://Assets/Sounds/Music/RoadArk-_Title_Track_-_V2.mp3", "res://Assets/Sounds/Music/cult_of_the_skull.mp3", "res://Assets/Sounds/Music/xenomorph.mp3", "res://Assets/Sounds/Music/haunting_of_the_flesh.mp3", "res://Assets/Sounds/Music/plauge_rat.mp3"]
 
 var current_soundtrack = 0
 var audio_stream_player

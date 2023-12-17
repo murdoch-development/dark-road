@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/RoadArk-_Title_Track_-_V2.mp3-ff82c4d35ba10661d91b8ccc82e20838.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sounds/Music/RoadArk-_Title_Track_-_V2.mp3"
+dest_files=[ "res://.import/RoadArk-_Title_Track_-_V2.mp3-ff82c4d35ba10661d91b8ccc82e20838.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
