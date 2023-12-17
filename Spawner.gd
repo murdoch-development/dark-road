@@ -25,5 +25,12 @@ func spawn():
 		return
 	var enemy = load("res://Zombie.tscn").instance()
 	add_child(enemy)
-	var angle = rand_range(-PI/2, PI/2) + player.linear_velocity.normalized().angle()
-	enemy.position = player.position + Vector2(spawn_radius, 0).rotated(angle)
+	if(player.linear_velocity.length() > 1500):
+		var angle = rand_range(-PI/2, PI/2) + player.linear_velocity.normalized().angle() - PI/2
+		enemy.position = player.position + Vector2(spawn_radius, 0).rotated(angle)
+	if(player.linear_velocity.length() > 500):
+		var angle = rand_range(-PI/1.5, PI/1.5) + player.linear_velocity.normalized().angle() - PI/2
+		enemy.position = player.position + Vector2(spawn_radius, 0).rotated(angle)
+	else:
+		var angle = rand_range(0, 2 * PI)
+		enemy.position = player.position + Vector2(spawn_radius, 0).rotated(angle)
