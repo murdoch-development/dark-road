@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=2]
+[gd_scene load_steps=74 format=2]
 
 [ext_resource path="res://Car.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Terrain/road_horizontal.png" type="Texture" id=2]
@@ -39,6 +39,7 @@
 [ext_resource path="res://Lighting/headlightpair.png" type="Texture" id=37]
 [ext_resource path="res://Lighting/light1.png" type="Texture" id=38]
 [ext_resource path="res://headlights.gd" type="Script" id=39]
+[ext_resource path="res://Label.gd" type="Script" id=40]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 480, 384, 0, 384, 0, 96, 480, 96 )
@@ -788,6 +789,33 @@ position = Vector2( 610, 676 )
 [node name="Camera2D" type="Camera2D" parent="Car"]
 current = true
 zoom = Vector2( 2, 2 )
+
+[node name="FPS" type="Node2D" parent="Car/Camera2D"]
+position = Vector2( -819.537, -866.488 )
+scale = Vector2( 10, 10 )
+z_index = 2000
+
+[node name="Label" type="Label" parent="Car/Camera2D/FPS"]
+margin_left = 23.551
+margin_top = 21.1657
+margin_right = 63.551
+margin_bottom = 35.1657
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
+text = "best"
+script = ExtResource( 40 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="light" type="Light2D" parent="Car/Camera2D/FPS"]
+position = Vector2( 35.218, 27.2528 )
+scale = Vector2( 0.05, 0.05 )
+z_index = 1002
+texture = ExtResource( 26 )
+range_height = 2048.0
+shadow_enabled = true
+shadow_gradient_length = 1013.0
 
 [node name="headlights" type="Node2D" parent="Car"]
 script = ExtResource( 39 )
