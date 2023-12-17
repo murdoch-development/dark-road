@@ -14,6 +14,8 @@ export var sideways_dynamic_friction = 0.3
 export var sideways_static_friction = 0.3
 export var handbrake_turn_factor = 2.5
 export var top_speed = 2800
+export var max_fuel_tank = 100
+export var current_fuel_tank = 100
 
 var high_speed = 2000
 var very_high_speed = 2600
@@ -36,6 +38,7 @@ func _ready():
 	$EngineRevving.play()
 
 func _physics_process(delta):
+	expend_fuel()
 	get_inputs()
 	apply_steering(delta)
 	apply_engine_force(delta)
@@ -266,6 +269,9 @@ func make_bloodmarks(delta):
 		$Tyres/BloodBackRight.emitting = false
 
 
+func expend_fuel(delta):
+	current_fuel_tank -= 10 * delta
+	
 
 func _on_RoadDetector_body_entered(body):
 	is_offroad = false
