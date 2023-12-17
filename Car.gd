@@ -41,7 +41,6 @@ func _physics_process(delta):
 	apply_drift(delta)
 	rev_engine()
 	emit_signal("screen_shake", is_offroad, linear_velocity.length())
-	print(linear_velocity.length())
 
 func get_inputs():
 	if Input.is_action_pressed("ui_left"):
@@ -130,11 +129,12 @@ func apply_drift(delta):
 		is_drifting = true
 		if not $TyreSqueal.playing:
 			$TyreSqueal.play()
-		do_skidmark(forward_velocity)
+		do_skidmark_particles(forward_velocity)
 	else:
 		is_drifting = false
 		sideways_friction *= 1
 		$TyreSqueal.stop()
+		dont_skidmark_particles()
 	var sideways_friction_force = sideways_friction * 10 * sideways_velocity.length() * -sideways_velocity.normalized()
 	if not handbrake:
 		apply_central_impulse(sideways_friction_force * delta)
@@ -151,7 +151,44 @@ func sideways_velocity_direction(rotation_angle):
 	else:
 		return 1 # Sideways velocity is to the left
 
+func do_skidmark_particles(forward_velocity):
+	if linear_velocity.length() < no_turning_speed:
+		return
+	if handbrake:
+		$Tyres/FrontLeft.emitting = true
+		$Tyres/FrontRight.emitting = true
+		$Tyres/MidLeft.emitting = true
+		$Tyres/MidRight.emitting = true
+		$Tyres/BackLeft.emitting = true
+		$Tyres/BackRight.emitting = true
+	elif dir > 0: #going forward
+		$Tyres/FrontLeft.emitting = false
+		$Tyres/FrontRight.emitting = false
+		$Tyres/MidLeft.emitting = true
+		$Tyres/MidRight.emitting = true
+		$Tyres/BackLeft.emitting = true
+		$Tyres/BackRight.emitting = true
+	else: #going backward
+		$Tyres/FrontLeft.emitting = true
+		$Tyres/FrontRight.emitting = true
+		$Tyres/MidLeft.emitting = false
+		$Tyres/MidRight.emitting = false
+		$Tyres/BackLeft.emitting = false
+		$Tyres/BackRight.emitting = false
+
+func dont_skidmark_particles():
+	$Tyres/FrontLeft.emitting = false
+	$Tyres/FrontRight.emitting = false
+	$Tyres/MidLeft.emitting = false
+	$Tyres/MidRight.emitting = false
+	$Tyres/BackLeft.emitting = false
+	$Tyres/BackRight.emitting = false
+
+
 func do_skidmark(forward_velocity):
+	
+	############ LEGACY CODE BEING SKIPPED BELOW ##############
+	return
 
 	if linear_velocity.length() < no_turning_speed:
 		return

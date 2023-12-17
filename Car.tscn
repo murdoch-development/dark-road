@@ -88,16 +88,22 @@ pitch_scale = 0.6
 [node name="Tyres" type="Node2D" parent="."]
 
 [node name="FrontLeft" parent="Tyres" instance=ExtResource( 4 )]
+position = Vector2( -29.4874, -70.1539 )
 
 [node name="FrontRight" parent="Tyres" instance=ExtResource( 4 )]
+position = Vector2( 30.0031, -70.1539 )
 
 [node name="MidLeft" parent="Tyres" instance=ExtResource( 4 )]
+position = Vector2( -28.25, 45 )
 
 [node name="MidRight" parent="Tyres" instance=ExtResource( 4 )]
+position = Vector2( 25.75, 47.25 )
 
 [node name="BackLeft" parent="Tyres" instance=ExtResource( 4 )]
+position = Vector2( -27.75, 77.75 )
 
 [node name="BackRight" parent="Tyres" instance=ExtResource( 4 )]
+position = Vector2( 25.5, 78.5 )
 
 [connection signal="body_entered" from="RoadDetector" to="." method="_on_RoadDetector_body_entered"]
 [connection signal="body_exited" from="RoadDetector" to="." method="_on_RoadDetector_body_exited"]

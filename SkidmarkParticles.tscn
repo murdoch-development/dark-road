@@ -3,5 +3,10 @@
 [ext_resource path="res://Assets/Sprites/Skidmarks/skidmark_square.png" type="Texture" id=1]
 
 [node name="SkidmarkParticles" type="CPUParticles2D"]
+scale = Vector2( 1.2, 1.2 )
+z_index = -90
+amount = 1000
+lifetime = 10.0
+local_coords = false
 texture = ExtResource( 1 )
 gravity = Vector2( 0, 0 )
