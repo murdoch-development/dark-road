@@ -2,6 +2,8 @@ extends RigidBody2D
 signal screen_shake(is_offroad, speed)
 signal die
 
+var is_dead = false
+
 var Skidmark = preload("Skidmark.tscn")
 
 export var acceleration_factor = 600.0
@@ -244,12 +246,16 @@ func do_skidmark(forward_velocity):
 		get_parent().add_child(back_skidmark)
 
 func rev_engine():
-	print($EngineRevving.pitch_scale)
+	# print($EngineRevving.pitch_scale)
 	if is_out_of_fuel:
 		$EngineRevving.pitch_scale = lerp($EngineRevving.pitch_scale, 0.4, 0.01)
+		if not is_dead:
+			is_dead = true
+			print("Car died")
+			emit_signal("die")
 		if $EngineRevving.pitch_scale <= 0.41:
 			$EngineRevving.playing = false
-			emit_signal("die")
+
 		return
 	var normalized_speed = min(linear_velocity.length() / top_speed, 1)
 	var target_pitch_scale
@@ -296,3 +302,9 @@ func _on_RoadDetector_body_entered(body):
 func _on_RoadDetector_body_exited(body):
 	is_offroad = true
 
+func death_effect(): 
+	for child in $headlights.get_children(): 
+		child.visible = false
+	$headlights/carlight.visible = true
+	$headlights/carlight2.visible = true
+	$EngineRevving.playing = false
