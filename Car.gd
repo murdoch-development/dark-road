@@ -38,7 +38,7 @@ func _ready():
 	$EngineRevving.play()
 
 func _physics_process(delta):
-	expend_fuel()
+	expend_fuel(delta)
 	get_inputs()
 	apply_steering(delta)
 	apply_engine_force(delta)
