@@ -1,6 +1,7 @@
 extends Node2D
 
 signal explode
+signal car_die
 
 func _ready():
 	pass # Replace with function body
