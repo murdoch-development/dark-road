@@ -9,6 +9,7 @@ var slay_modulation = 1.0
 var bright_lights_is_modulating = false
 var bright_lights_modulation = 1
 var is_moving = false
+var skip_level = false
 
 func _ready():
 	$Black.visible = true
@@ -20,6 +21,8 @@ func _ready():
 	$CarText.visible = false
 
 func _process(delta):
+	if skip_level:
+		return
 	if Input.is_action_pressed("ui_select")\
 	or Input.is_action_pressed("ui_accept"):
 		start()
@@ -32,12 +35,21 @@ func _process(delta):
 		print("light: ", bright_lights_modulation)
 	if is_moving and $LogoROADARK.position.y < 0:
 		$LogoROADARK.position.y += delta * button_speed
+	if Input.is_action_pressed("ui_cancel") and not skip_level:
+		skip_level = true
+		if not is_started:
+			emit_signal("play_next_song")
+		emit_signal("next_level")
 
 func _on_Area2D_input_event(viewport, event, shape_idx):
+	if skip_level:
+		return
 	if Input.is_action_just_pressed("click"):
 	   start()
 
 func start():
+	if skip_level:
+		return
 	if is_started:
 		return
 	is_started = true
