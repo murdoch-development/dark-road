@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Lights NoText.png-40f85225c935e99fdcdb1a84cd4b9702.stex"
+path="res://.import/Lights NoText.png-54f73d902e38df753a1c53a5f082c001.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Poster/Lights NoText.png"
-dest_files=[ "res://.import/Lights NoText.png-40f85225c935e99fdcdb1a84cd4b9702.stex" ]
+source_file="res://Assets/Sprites/Title/Lights NoText.png"
+dest_files=[ "res://.import/Lights NoText.png-54f73d902e38df753a1c53a5f082c001.stex" ]
 
 [params]
 
