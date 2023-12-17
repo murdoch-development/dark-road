@@ -10,9 +10,10 @@ config_version=4
 
 [application]
 
-config/name="FirstScript"
+config/name="Roadark"
+config/description="Drive down a dark road"
 run/main_scene="res://MasterController.tscn"
-config/icon="res://icon.png"
+config/icon="res://Assets/UI/Fuel Guage.png"
 
 [display]
 
