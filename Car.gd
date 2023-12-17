@@ -45,12 +45,14 @@ var bloodmark_duration = 2
 var bloodmark_time_left = 0
 
 var has_started = false
+var time_survived = 0
 
 func _ready():
 	$EngineRevving.play()
 
 var start_time = 1
 func _physics_process(delta):
+	time_survived += delta
 	if not has_started: 
 		if start_time <= 0 and Input.is_action_pressed("ui_up"): 
 			has_started = true

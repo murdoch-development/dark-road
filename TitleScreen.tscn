@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://TitleScreen.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/Title/title_red_lights_bright.png" type="Texture" id=2]
@@ -10,9 +10,14 @@
 [ext_resource path="res://Assets/Sprites/Title/Lights + Text.png" type="Texture" id=8]
 [ext_resource path="res://Assets/Sprites/Title/Lights NoText.png" type="Texture" id=9]
 [ext_resource path="res://Assets/Sprites/Title/TextOnly.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Fonts/montserrat/Montserrat-Regular.ttf" type="DynamicFontData" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 362.667, 157.333 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 31
+font_data = ExtResource( 11 )
 
 [node name="TitleScreen" type="Node2D"]
 script = ExtResource( 1 )
@@ -47,8 +52,7 @@ texture = ExtResource( 4 )
 centered = false
 
 [node name="PlayButton" type="Sprite" parent="."]
-visible = false
-position = Vector2( 960, 540 )
+position = Vector2( 960, 738.258 )
 scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 7 )
 offset = Vector2( 5, 0 )
@@ -59,8 +63,7 @@ offset = Vector2( 5, 0 )
 shape = SubResource( 1 )
 
 [node name="SlayButton" type="Sprite" parent="."]
-visible = false
-position = Vector2( 960, 540 )
+position = Vector2( 960, 738.258 )
 scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 6 )
 offset = Vector2( 5, 0 )
@@ -75,5 +78,22 @@ visible = false
 position = Vector2( 0, -377.573 )
 texture = ExtResource( 10 )
 centered = false
+
+[node name="Description" type="Node2D" parent="."]
+
+[node name="Text" type="Label" parent="Description"]
+margin_left = 60.8757
+margin_top = 62.4577
+margin_right = 1860.88
+margin_bottom = 662.458
+custom_fonts/font = SubResource( 2 )
+text = "The World as we know it has ended. Croakers fill the streets at night, they have lost all semblance of humanity, hungering for human flesh they hunt in the dark. We are forced to sleep in the day when it's safe and keep on the move from sunset till dawn.
+
+I have tightened up as many bolts and welded as much as I can on the belly scraper and methane processing unit. It's crunching away on last night's harvest, which was meagre; belly scraper is only half full, maybe the next stretch of road will be better… 
+I just need to survive to another dawn..."
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="input_event" from="PlayButton/Area2D" to="." method="_on_Area2D_input_event"]

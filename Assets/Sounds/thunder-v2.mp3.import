@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/thunder-v2.mp3-69da2a61bc0997dd547abfec5a092754.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sounds/thunder-v2.mp3"
+dest_files=[ "res://.import/thunder-v2.mp3-69da2a61bc0997dd547abfec5a092754.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
