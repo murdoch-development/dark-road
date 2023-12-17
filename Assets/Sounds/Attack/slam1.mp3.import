@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/slam1.mp3-d877d5e55f0b5e2f2079750618b5d3ec.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sounds/Attack/slam1.mp3"
+dest_files=[ "res://.import/slam1.mp3-d877d5e55f0b5e2f2079750618b5d3ec.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -11,5 +11,5 @@ dest_files=[ "res://.import/Monster 20.mp3-26922d0db7b49952d2bac69807aea2e1.mp3s
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

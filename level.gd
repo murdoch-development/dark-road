@@ -1,6 +1,6 @@
 extends Node2D
 
-signal car_die
+signal explode
 
 func _ready():
 	pass # Replace with function body
@@ -13,6 +13,7 @@ func _on_Car_die():
 	$Car.add_child(explosion)
 	yield(get_tree().create_timer(2.2), "timeout")
 	# yield(get_tree().create_timer(1), "timeout")
+	emit_signal("explode")
 	$Car/Sprite.visible = false
 	yield(get_tree().create_timer(2), "timeout")
 	emit_signal("car_die")
