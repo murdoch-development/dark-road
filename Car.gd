@@ -18,8 +18,8 @@ export var sideways_dynamic_friction = 0.3
 export var sideways_static_friction = 0.3
 export var handbrake_turn_factor = 2.5
 export var top_speed = 2800
-export var max_fuel_tank = 100
-export var current_fuel_tank = 100
+export var max_fuel_tank = 1000
+export var current_fuel_tank = 500
 export var fuel_per_zombie_hit = 10
 
 var is_out_of_fuel = false
