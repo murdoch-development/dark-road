@@ -873,6 +873,7 @@ texture = ExtResource( 46 )
 
 [node name="Car" parent="." instance=ExtResource( 1 )]
 position = Vector2( 2157, 6242 )
+current_fuel_tank = 10
 
 [node name="Camera2D" type="Camera2D" parent="Car"]
 position = Vector2( 5, -80 )
